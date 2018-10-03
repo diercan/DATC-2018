@@ -1,3 +1,0 @@
-https://www.service-architecture.com/articles/web-services/service-oriented_architecture_soa_definition.html
-https://www.ibm.com/support/knowledgecenter/en/SSMQ79_9.5.1/com.ibm.egl.pg.doc/topics/pegl_serv_overview.html
-http://www.opengroup.org/soa/source-book/soa/p4.htm
