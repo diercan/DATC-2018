@@ -1,0 +1,3 @@
+https://www.service-architecture.com/articles/web-services/representational_state_transfer_rest.html
+https://searchmicroservices.techtarget.com/definition/REST-representational-state-transfer
+https://en.wikipedia.org/wiki/Representational_state_transfer 
