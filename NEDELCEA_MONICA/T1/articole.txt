@@ -1,0 +1,3 @@
+https://www.httpwatch.com/httpgallery/authentication/
+http://qnimate.com/understanding-http-authentication-in-depth/
+https://en.wikipedia.org/wiki/Digest_access_authentication
