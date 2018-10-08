@@ -1,3 +1,0 @@
-https://www.bmc.com/blogs/service-oriented-architecture-overview/
-https://www.javaworld.com/article/2071889/soa/what-is-service-oriented-architecture.html
-https://searchmicroservices.techtarget.com/definition/service-oriented-architecture-SOA
