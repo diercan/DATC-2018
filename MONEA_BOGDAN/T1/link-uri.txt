@@ -1,0 +1,6 @@
+DATC:
+https://en.wikipedia.org/wiki/Microsoft_Azure
+https://en.wikipedia.org/wiki/Platform_as_a_service
+https://en.wikipedia.org/wiki/Software_as_a_service
+
+
