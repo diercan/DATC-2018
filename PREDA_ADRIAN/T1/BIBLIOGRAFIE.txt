@@ -1,0 +1,3 @@
+https://en.wikipedia.org/wiki/Service-oriented_architecture
+https://smartbear.com/blog/test-and-monitor/understanding-soap-and-rest-basics/
+https://ro.wikipedia.org/wiki/SOA
