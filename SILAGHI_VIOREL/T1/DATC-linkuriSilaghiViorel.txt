@@ -1,0 +1,3 @@
+https://techterms.com/definition/http
+https://www.webopedia.com/TERM/H/HTTP.html
+http://restcookbook.com/HTTP%20Methods/idempotency/
