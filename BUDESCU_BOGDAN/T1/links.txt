@@ -1,0 +1,8 @@
+﻿1. HTTP ~~
+    How Evolution Of HTTP/2 From HTTP/1 Changed The Web - https://itnext.io/how-evolution-of-http-2-from-http-1-changed-the-web-889bee4b0768
+    Evolution of HTTP — HTTP/0.9, HTTP/1.0, HTTP/1.1, Keep-Alive, Upgrade, and HTTPS - https://medium.com/platform-engineer/evolution-of-http-69cfe6531ba0
+    HTTP and Websockets: Understanding the capabilities of today’s web communication technologies - https://medium.com/platform-engineer/web-api-design-35df8167460
+2. REST ~~
+    https://hackernoon.com/restful-api-design-with-node-js-26ccf66eab09
+4. JWT ~~
+    https://medium.com/vandium-software/5-easy-steps-to-understanding-json-web-tokens-jwt-1164c0adfcec
