@@ -1,0 +1,3 @@
+https://www.howtogeek.com/343877/what-is-an-api/
+https://ffeathers.wordpress.com/2014/02/16/api-types/
+https://it.toolbox.com/blogs/glennjohnson/application-programming-interface-api-definition-and-classification-by-types-040214?fbclid=IwAR0rN-DbAuwkp7vdPfD4o84qV4nmJ4gjZE_CpXBiN6N0N4n5HfxpEg0rwSs
