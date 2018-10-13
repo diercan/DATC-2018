@@ -1,0 +1,3 @@
+https://en.wikipedia.org/wiki/Google_Cloud_Platform
+https://en.wikipedia.org/wiki/Microsoft_Azure
+https://ro.wikipedia.org/wiki/Hypertext_Transfer_Protocol
