@@ -1,0 +1,5 @@
+https://en.wikipedia.org/wiki/Service-oriented_architecture
+
+https://medium.com/vandium-software/5-easy-steps-to-understanding-json-web-tokens-jwt-1164c0adfcec
+
+https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177
