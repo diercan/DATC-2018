@@ -1,0 +1,3 @@
+https://en.wikipedia.org/wiki/ICloud_leaks_of_celebrity_photos
+https://cloud.google.com/endpoints/docs/openapi/authentication-method
+https://www.techfunnel.com/information-technology/cloud-authentication-methods-and-issues-faced/
