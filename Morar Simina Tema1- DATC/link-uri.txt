@@ -1,0 +1,3 @@
+https://www-01.ibm.com/software/solutions/soa/
+https://ro.wikipedia.org/wiki/SOA
+https://www.ibm.com/support/knowledgecenter/en/SSMQ79_9.5.1/com.ibm.egl.pg.doc/topics/pegl_serv_overview.html
