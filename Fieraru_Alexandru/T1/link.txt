@@ -1,0 +1,3 @@
+https://eveonline-third-party-documentation.readthedocs.io/en/latest/sso/refreshtokens.html?fbclid=IwAR16vTcV2-yy8hdpxFZNp8wOXl9_kkD_2dfKgm5fIALQQdff-zueRfW7ccg
+https://auth0.com/learn/refresh-tokens/
+https://developer.ibm.com/wa…/authentication-refresh-tokens/
