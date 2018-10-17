@@ -1,0 +1,3 @@
+https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol
+https://searchwindevelopment.techtarget.com/definition/HTTP
+https://www.w3.org/…/rfc2616…/draft-lafon-rfc2616bis-03.html
