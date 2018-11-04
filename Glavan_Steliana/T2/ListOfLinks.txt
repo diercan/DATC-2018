@@ -1,0 +1,5 @@
+https://profs.info.uaic.ro/~adria/teach/courses/CloudComputing/resources/CC3_CloudComputing_IaaS.pdf
+
+http://www.sistemis.ro/ro/blog/item/7-stiva-saas-paas-iaas
+
+https://docs.microsoft.com/en-us/azure/virtual-machines/windows/overview
