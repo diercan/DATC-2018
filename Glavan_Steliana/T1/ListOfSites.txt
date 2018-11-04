@@ -1,0 +1,5 @@
+SOA - https://www.scribd.com/document/70537392/Caracteristici-Ale-Arhitecturii-Bazate-Pe-Servicii
+
+Coada de mesaje - http://swarm.cs.pub.ro/~razvan/so-2005/lab5/lab5.html
+
+Access token - https://en.wikipedia.org/wiki/Access_token
