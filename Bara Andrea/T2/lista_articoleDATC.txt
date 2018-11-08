@@ -1,0 +1,3 @@
+https://devopedia.org/container-orchestration
+https://www.techrepublic.com/blog/10-things/10-things-you-should-know-about-docker/
+https://searchitoperations.techtarget.com/definition/Dockerhitoperations.techtarget.com/definition/Docker
