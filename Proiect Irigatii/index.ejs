@@ -1,0 +1,91 @@
+<!doctype html>
+<html ng-app>
+<head>
+<meta charset="utf-8">
+<tilte style="text-shadow: black; font-size: large; border-left: 10px;">Sistem de irigatie</title><br>
+<script src="../js/angular.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<base href="/">
+
+</head>
+<body style="background-color: #689784" >
+
+    <form class="navbar-form navbar-left" role="search">
+  <div class="form-group">
+    <div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Selecteaza
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="#">Stadionul Dan Paltinisanu</a></li>
+    <li><a href="#">Gradina Zoologica</a></li>
+    <li><a href="#">Parcul Botanic</a></li>
+    <li><a href="#">Parcul Rozelor</a></li>
+     <li><a href="#">Parcul Copiilor</a></li>
+  </ul>
+  
+    <button  style="background- color: #ccccff; color: black; ">Valori Senzori</button>
+    <button onclick="displayValues()" style="background- color: #ccccff; color: black;">Istoric</button>
+    </div> 
+    </div>
+  </form> 
+<br>
+
+
+<br>
+<div id="map" style="height: 400px; width: 100%;  "></div>
+<br>
+<div style="display: none" id="tableOfValues">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Data</th>
+      <th scope="col">Temperatura</th>
+      <th scope="col">Umiditate</th>
+      <th scope="col">Pornire sistem irigatii</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
+</table>
+  </div>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMwQDCgE-rLGZb11J_Kp2fij0VoVGtIpM&callback=initMap"
+    async defer></script>
+<script>
+function initMap() {
+    var tm = {
+      lat: 45.75372,
+      lng: 21.22571
+    };
+    // The map, centered at Timisoara
+    var map = new google.maps.Map(
+      document.getElementById('map'), {
+        zoom: 10,
+        center: tm
+      });
+    // The marker, positioned at Timisoara
+    var marker = new google.maps.Marker({
+      position: tm,
+      map: map
+    });
+  
+  }
+
+function displayValues()
+{   console.log("functie tabel");
+    document.getElementById("tableOfValues").style.display ="inline";
+}
+
+</script>
+</body>
+</html>
