@@ -11,5 +11,6 @@ namespace api_worker.Models
         public string LocatieParcare { get; set; }
         public int TotalLocuri { get; set; }
         public string StareLocuri { get; set; }
+        public int LocuriDisponibile { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace generator_parcare
         {
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "UPDATE Parcari SET STARE_PARCARE = '" + this.GenereazaLocuriAleator(Convert.ToInt16(nr_total_locuri_regenerare.Value)) + "' WHERE ID_PARCARE = " + txt_id_parcare.Text;
+            cmd.CommandText = "UPDATE Parcari SET STARE_PARCARE = '" + this.GenereazaLocuriAleator(Convert.ToInt16(nr_total_locuri_regenerare.Value)) + "', LOCURI_TOTALE = " + Convert.ToInt16(nr_total_locuri_regenerare.Value) + " WHERE ID_PARCARE = " + txt_id_parcare.Text;
             cmd.Connection = _conn;
             _conn.Open();
             cmd.ExecuteNonQuery();
@@ -54,7 +54,7 @@ namespace generator_parcare
                 locuri += _rnd.Next(2) + ",";
             }
             
-            return locuri.Substring(0, locuri.Length - 1); ;
+            return locuri.Substring(0, locuri.Length - 1);
         }
     }
 }

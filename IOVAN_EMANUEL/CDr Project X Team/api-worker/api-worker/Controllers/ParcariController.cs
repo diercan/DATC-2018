@@ -1,58 +1,79 @@
-﻿using api_worker.Models;
+﻿using api_worker.Logic.Implementations;
+using api_worker.Logic.Interfaces;
+using api_worker.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace api_worker.Controllers
 {
     public class ParcariController : ApiController
     {
-        private DatabaseContext dbContext = new DatabaseContext("Data Source=cdr-x-server.database.windows.net;" + "Initial Catalog=CDrXDB;" + "User id=cdrxadmin;" + "Password=cdrxpass1!;");
+        private readonly IParcariLogic _parcariLogic;
 
-        // GET api/parcari
+        public ParcariController()
+        {
+            _parcariLogic = new ParcariLogic();
+        }
+
+        // GET api/get/parcari
+        [HttpGet]
         [Route("api/get/parcari")]
-        public IEnumerable<ParcariModel> Get()
+        [ResponseType(typeof(IEnumerable<ParcariModel>))]
+        public IHttpActionResult GetParcari()
         {
-            var parcari = dbContext.Parcari.Select(s => new ParcariModel
-            {
-                IdParcare = s.ID_PARCARE,
-                LocatieParcare = s.LOCATIE,
-                TotalLocuri = s.LOCURI_TOTALE,
-                StareLocuri = s.STARE_PARCARE
-            }).ToList();         
-            return parcari;
+            var parcari = _parcariLogic.GetParcari();
+            return Ok(parcari);
         }
 
-        // GET api/parcari/5
+        // GET api/get/parcari/1
+        [HttpGet]
         [Route("api/get/parcari/{id:int}")]
-        public ParcariModel Get(int id)
+        [ResponseType(typeof(ParcariModel))]
+        public IHttpActionResult GetParcare(int id)
         {
-            var parcare = dbContext.Parcari.Where(w => w.ID_PARCARE == id).Select(s => new ParcariModel
-            {
-                IdParcare = s.ID_PARCARE,
-                LocatieParcare = s.LOCATIE,
-                TotalLocuri = s.LOCURI_TOTALE,
-                StareLocuri = s.STARE_PARCARE
-            }).SingleOrDefault();
-            return parcare;
+            var parcare = _parcariLogic.GetParcare(id);
+            return Ok(parcare);
         }
 
-        // POST api/values
-        public void Post([FromBody]string value)
+        // POST api/post/parcari
+        [HttpPost]
+        [Route("api/post/parcari")]
+        [ResponseType(typeof(int))]
+        public IHttpActionResult InsertParcare([FromBody]ParcariModel parcare)
         {
+            var id = _parcariLogic.InsertParcare(parcare);
+            return Ok(id);
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        // PUT api/put/parcari/1/pozitie/2/valoare/1
+        [HttpPut]
+        [Route("api/put/parcari/{id:int}/pozitie/{pozitie:int}/valoare/{valoare}")]
+        [ResponseType(typeof(bool))]
+        public IHttpActionResult UpdateSituatieParcare(int id, int pozitie, string valoare)
         {
+            var update = _parcariLogic.UpdateSituatieParcare(id, pozitie, valoare);
+
+            if (update == false) return NotFound();
+
+            return Ok(update);
         }
 
-        // DELETE api/values/5
-        public void Delete(int id)
+        // DELETE api/delete/parcari/1
+        [HttpDelete]
+        [Route("api/delete/parcari/{id:int}")]
+        [ResponseType(typeof(bool))]
+        public IHttpActionResult StergeParcare(int id)
         {
+            var sterge = _parcariLogic.StergeParcare(id);
+
+            if (sterge == false) return NotFound();
+
+            return Ok(sterge);
         }
     }
 }
