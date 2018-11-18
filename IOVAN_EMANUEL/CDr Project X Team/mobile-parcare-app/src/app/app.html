@@ -1,0 +1,35 @@
+<ion-menu [content]="mycontent">
+    <ion-header class="left-nav-header">
+      <ion-toolbar class="text-left">
+        <ion-row class="left-nav-header-row">
+          <ion-col col-auto class="align-center" no-padding>
+            <ion-icon class="cdr-car-logo" name="car"></ion-icon>
+          </ion-col>
+          <ion-col col-auto class="align-center" no-padding>
+            <span class="header-title">Clinic Doctor</span>
+            <span class="header-subtitle color-gray">X Parking</span>
+          </ion-col>
+        </ion-row>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-content>      
+    </ion-content>
+  
+    <ion-footer class="left-nav-footer">
+      <ion-title>
+        <div>
+          <span class="title-footer">
+            CDr X Project
+          </span>
+        </div>
+        <div>
+          <span class="copyright-footer">
+            &copy; 2018 Clinic Doctor, Inc. All rights reserved.
+          </span>
+        </div>
+      </ion-title>
+    </ion-footer>
+  </ion-menu>
+  
+  <ion-nav #mycontent [root]="rootPage"></ion-nav>

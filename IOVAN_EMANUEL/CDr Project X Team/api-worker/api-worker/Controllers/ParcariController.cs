@@ -1,16 +1,14 @@
 ﻿using api_worker.Logic.Implementations;
 using api_worker.Logic.Interfaces;
 using api_worker.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 
 namespace api_worker.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ParcariController : ApiController
     {
         private readonly IParcariLogic _parcariLogic;
