@@ -1,0 +1,3 @@
+https://en.wikipedia.org/wiki/Cosmos_DB
+https://www.ontotext.com/knowledgehub/fundamentals/nosql-graph-database/
+https://en.wikipedia.org/wiki/Graph_database
