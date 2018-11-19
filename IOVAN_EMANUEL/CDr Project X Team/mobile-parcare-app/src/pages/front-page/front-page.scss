@@ -1,0 +1,30 @@
+page-front-page {
+    ion-content {
+        background-image: url('/assets/imgs/background.jpg');
+        background-attachment: fixed;
+        background-position: center; 
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+
+    ion-icon {
+        margin-top: 65px;
+        font-size: 200px;
+    }
+
+    .cdr-title h1 {
+        font-size: 37px;
+    }
+
+    ion-item {
+        &.input-radius {
+            border-radius: 3px;
+        }
+    }
+
+    ion-list {
+        &.input-list {
+            margin-top: 30px;
+        }
+    }
+}
