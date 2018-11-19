@@ -1,0 +1,3 @@
+https://azure.microsoft.com/en-us/get-started/web-app/
+https://docs.microsoft.com/en-us/azure/app-service/
+https://docs.microsoft.com/en-us/azure/app-service/app-service-web-get-started-dotnet
