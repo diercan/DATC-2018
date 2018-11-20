@@ -1,0 +1,3 @@
+https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+https://www.codecademy.com/articles/what-is-cors
+https://www.csoonline.com/article/3216404/authentication/what-is-oauth-how-the-open-authorization-framework-works.html
