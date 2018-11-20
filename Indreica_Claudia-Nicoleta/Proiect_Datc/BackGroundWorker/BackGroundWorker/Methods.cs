@@ -7,13 +7,13 @@ namespace BackGroundWorker
     class Methods
     {
         //Fetch Random Values from Random Data generator  through queues
-        public void FetchRandomValues()
+        public void ReceiveHumidValues()
         {
-            //
+            // Receive queue from cloud amqp and store in some global variables
         }
 
         //Fetch pumps status from DataBase through an API
-        public void FetchPumpsStatus()
+        public void FetchHumidityIntervals()
         {
 
         }
@@ -26,7 +26,7 @@ namespace BackGroundWorker
                
         public void ManageIrrigationPumps()
         {
-            FetchPumpsStatus();
+            FetchHumidityIntervals();
 
             bool condition = false;
 
@@ -45,7 +45,7 @@ namespace BackGroundWorker
         {
             bool condition1 = false;
             bool condition2 = false;
-            FetchRandomValues();
+            ReceiveHumidValues();
 
             if (condition1)
             {
