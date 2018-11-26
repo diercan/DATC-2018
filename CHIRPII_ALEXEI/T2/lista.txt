@@ -1,0 +1,5 @@
+Bibliografie:
+https://www.html5rocks.com/en/tutorials/workers/basics/
+https://docs.microsoft.com/EN-US/AZURE/ARCHITECTURE/BEST-PRACTICES/BACKGROUND-JOBS
+https://www.w3schools.com/html/html5_webworkers.asp
+https://www.sitepoint.com/how-to-schedule-background-tasks-in-javascript/
