@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Contul meu
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list text-center>
+    <ion-grid *ngIf="auth.userData">
+      <ion-row >
+        <ion-col size="4">
+          Nume
+        </ion-col>
+        <ion-col>
+          {{auth.userData.FirstName}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          Prenume
+        </ion-col>
+        <ion-col>
+          {{auth.userData.LastName}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          Email
+        </ion-col>
+        <ion-col>
+          {{auth.userData.Email}}
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row>
+        <ion-col>
+        </ion-col>
+        <ion-col>
+        </ion-col>
+      </ion-row> -->
+    </ion-grid>
+    <ion-button padding expand="block" (click)="logout()">
+      Logout
+    </ion-button>
+  </ion-list>
+</ion-content>

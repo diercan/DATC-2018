@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-title (click)="goToLogin()">
+      <ion-icon name="arrow-round-back"></ion-icon>
+      Go back
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <form #registerForm="ngForm">
+
+      <ion-row justify-content-center>
+        <ion-col align-self-center>
+
+          <ion-item>
+            <ion-icon class='my-custom-icon' name="person"></ion-icon>
+            <ion-input type="text" placeholder="First Name" name="FirstName" [(ngModel)]="registerUserModel.FirstName"></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col align-self-center>
+          <ion-item>
+            <!-- <ion-icon class='my-custom-icon' name="person"></ion-icon> -->
+            <ion-input type="text" placeholder="Last Name" name="LastName" [(ngModel)]="registerUserModel.LastName"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-center>
+
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div>
+
+            <ion-item>
+              <ion-icon class='my-custom-icon' name="mail"></ion-icon>
+              <ion-input type="text" placeholder="Email" name="Email" [(ngModel)]="registerUserModel.Email"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-icon class='my-custom-icon' name="lock"></ion-icon>
+              <ion-input type="password" placeholder="Password" name="Password" [(ngModel)]="registerUserModel.Password"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-icon class='my-custom-icon' name="lock"></ion-icon>
+              <ion-input type="password" placeholder="Confirm Password" name="ConfirmPassword" [(ngModel)]="registerUserModel.ConfirmPassword"></ion-input>
+            </ion-item>
+          </div>
+
+          <div padding>
+            <ion-button expand="block" (click)="register()">Register</ion-button>
+          </div>
+          <div>
+
+          </div>
+        </ion-col>
+      </ion-row>
+    </form>
+
+  </ion-grid>
+</ion-content>
