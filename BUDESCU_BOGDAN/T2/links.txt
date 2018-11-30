@@ -1,0 +1,4 @@
+https://martinfowler.com/articles/serverless.html
+https://www.booleanworld.com/serverless-computing-explained/
+https://docs.microsoft.com/en-gb/azure/azure-functions/
+https://en.wikipedia.org/wiki/Serverless_computing
