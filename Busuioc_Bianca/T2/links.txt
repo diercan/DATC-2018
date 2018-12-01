@@ -1,0 +1,5 @@
+ - https://despretot.info/virtualizare-definitie/
+ - http://csv.scrieunblog.com/articles/ce-este-un-hypervisor.html
+ - https://cloudmania2013.com/tag/diferente-intre-cloud-si-virtualizare/
+ - https://ocw.cs.pub.ro/courses/_media/rl/courses/rl_curs_10.pdf
+ 
