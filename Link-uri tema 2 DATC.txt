@@ -1,3 +1,0 @@
-http://cloudgirl.tech/data-partitioning-vertical-horizontal-hybrid-partitioning/?fbclid=IwAR39PruZOChi3x4FqdEFfjHEqfcHoFMvKygFXgUXIhWH3OjYfShGC1qrNXY
-https://docs.microsoft.com/en-us/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/data-partitioning-strategies?fbclid=IwAR23kjZ4L2iuz_L1t0KINHg5Is7HNI2d1siZ1lj7VGo4Eviqn6v0YVGBsS4
-https://docs.microsoft.com/en-us/azure/architecture/best-practices/data-partitioning?fbclid=IwAR0v77K6kN2jYwe8AJQaX5m-EsqlrASeqJ7H9QV2WdIda4JG2ifZagbJh_o
