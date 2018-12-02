@@ -1,0 +1,3 @@
+https://rezolvit.ro/infrastructura-ca-serviciu-iaas/
+https://docs.microsoft.com/en-us/azure/virtual-machines/windows/overview?fbclid=IwAR2MfiHs91X5weyCfDxGREhPgrKGjgennRvuU-n4aJTecHX4YF6Hthc53hc
+https://www.alef.com/ro/masinile-virtuale-din-azure-si-instantele-rezervate.c-247.html
