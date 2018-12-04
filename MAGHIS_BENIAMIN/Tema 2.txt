@@ -1,3 +1,0 @@
-https://blog.sapiensworks.com/post/2016/07/29/DDD-Entities-Value-Objects-Explained
-https://enterprisecraftsmanship.com/2016/01/11/entity-vs-value-object-the-ultimate-list-of-differences/
-https://lostechies.com/jimmybogard/2008/05/21/entities-value-objects-aggregates-and-roots/
