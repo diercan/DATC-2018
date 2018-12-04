@@ -1,0 +1,3 @@
+https://searchmicroservices.techtarget.com/definition/REST-representational-state-transfer?fbclid=IwAR0a5kDJI6-TQfzaKLmzSw1Tgvkd-X_LLNtvlOvZRvhlyAYZJrZPaOwv-so
+https://spring.io/understanding/REST?fbclid=IwAR3ijZLr1KJdU_hDjS-SRrsKEd0qEXseX4uWgGjhwlmHg5_LhLdZ7LlbLQc
+https://www.mulesoft.com/resources/api/what-is-rest-api-design?fbclid=IwAR3iInqvYVcESoja2q2DmwtcN0iGk8EBq6R12OJj8vsP8PPIvaEaWFn-g9A
