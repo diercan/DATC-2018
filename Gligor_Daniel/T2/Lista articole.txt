@@ -1,0 +1,4 @@
+https://www.researchgate.net/publication/260305189_Multi-Tenancy_in_Cloud_Computing
+https://www.konstantinfo.com/blog/why-multi-tenancy-application-architecture-matters/
+https://digitalguardian.com/blog/saas-single-tenant-vs-multi-tenant-whats-difference
+
