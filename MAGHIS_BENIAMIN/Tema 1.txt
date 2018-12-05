@@ -1,0 +1,3 @@
+https://www.codecademy.com/articles/what-is-rest
+https://spring.io/understanding/REST
+https://searchmicroservices.techtarget.com/definition/REST-representational-state-transfer

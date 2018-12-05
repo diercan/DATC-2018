@@ -1,0 +1,3 @@
+https://www.researchgate.net/publication/325570099_Overview_of_Horizontal_Partitioning_and_Vertical_Partitioning
+https://docs.microsoft.com/en-us/azure/architecture/best-practices/data-partitioning
+https://docs.microsoft.com/en-us/azure/architecture/patterns/sharding
