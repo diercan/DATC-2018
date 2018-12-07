@@ -1,0 +1,3 @@
+https://azure.microsoft.com/nl-nl/blog/managing-concurrency-in-microsoft-azure-storage-2/
+https://coredump.ro/questions/37369877/azure-table-storage-managing-concurrency
+https://drive.google.com/drive/folders/0BztNbrwmSAfRVUlaT29tS0dkZW8?fbclid=IwAR2aVV50ZnJ-v0sY_NSo1546jWDImmd1vYyxUo9AAHlRlmmXjFLCqEQX1K0
