@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GenerareDate")]
+[assembly: AssemblyTitle("ArduinoHumidityCheck")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GenerareDate")]
+[assembly: AssemblyProduct("ArduinoHumidityCheck")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5b042496-5d33-4b25-9275-c5f917b31a5e")]
+[assembly: Guid("63f8a074-cd29-4b91-af14-8290f5d51361")]
 
 // Version information for an assembly consists of the following four values:
 //

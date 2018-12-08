@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GenerareDate.Properties
+namespace ArduinoHumidityCheck.Properties
 {
 
 
