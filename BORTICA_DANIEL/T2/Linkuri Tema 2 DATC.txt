@@ -1,0 +1,5 @@
+https://www.computerworld.com/article/2517005/data-center/multi-tenancy-in-the-cloud--why-it-matters.html
+
+https://streaml.io/blog/multi-tenant-messaging-with-apache-pulsar
+
+https://digitalguardian.com/blog/saas-single-tenant-vs-multi-tenant-whats-difference
