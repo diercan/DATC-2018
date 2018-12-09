@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="IrigationDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IrigationDB.dbo.Istoric' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Istoric">
+          <Key>
+            <PropertyRef Name="Data" />
+          </Key>
+          <Property Name="Data" Type="date" Nullable="false" />
+          <Property Name="MedieTemperatura" Type="float" />
+          <Property Name="MedieUmiditate" Type="float" />
+        </EntityType>
+        <EntityType Name="Senzori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Locatie" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IrigationDB.dbo.Values' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Values">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Timestemp" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Temperatura" Type="float" />
+          <Property Name="Umiditate" Type="float" />
+          <Property Name="Timestemp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Values__Id__3587F3E0">
+          <End Role="Senzori" Type="Self.Senzori" Multiplicity="1" />
+          <End Role="Values" Type="Self.Values" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Senzori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Values">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IrigationDBModelStoreContainer">
+          <EntitySet Name="Senzori" EntityType="Self.Senzori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Istoric" EntityType="Self.Istoric" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Istoric].[Data] AS [Data], 
+    [Istoric].[MedieTemperatura] AS [MedieTemperatura], 
+    [Istoric].[MedieUmiditate] AS [MedieUmiditate]
+    FROM [dbo].[Istoric] AS [Istoric]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Values" EntityType="Self.Values" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Values].[Id] AS [Id], 
+    [Values].[Temperatura] AS [Temperatura], 
+    [Values].[Umiditate] AS [Umiditate], 
+    [Values].[Timestemp] AS [Timestemp]
+    FROM [dbo].[Values] AS [Values]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Values__Id__3587F3E0" Association="Self.FK__Values__Id__3587F3E0">
+            <End Role="Senzori" EntitySet="Senzori" />
+            <End Role="Values" EntitySet="Values" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IrigationDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Senzori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Locatie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Values" Relationship="Self.FK__Values__Id__3587F3E0" FromRole="Senzori" ToRole="Values" />
+        </EntityType>
+        <EntityType Name="Istoric">
+          <Key>
+            <PropertyRef Name="Data" />
+          </Key>
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MedieTemperatura" Type="Double" />
+          <Property Name="MedieUmiditate" Type="Double" />
+        </EntityType>
+        <EntityType Name="Value">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Timestemp" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Temperatura" Type="Double" />
+          <Property Name="Umiditate" Type="Double" />
+          <Property Name="Timestemp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Senzori" Relationship="Self.FK__Values__Id__3587F3E0" FromRole="Values" ToRole="Senzori" />
+        </EntityType>
+        <Association Name="FK__Values__Id__3587F3E0">
+          <End Role="Senzori" Type="Self.Senzori" Multiplicity="1" />
+          <End Role="Values" Type="Self.Value" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Senzori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Values">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IrigationDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Senzoris" EntityType="Self.Senzori" />
+          <EntitySet Name="Istorics" EntityType="Self.Istoric" />
+          <EntitySet Name="Values" EntityType="Self.Value" />
+          <AssociationSet Name="FK__Values__Id__3587F3E0" Association="Self.FK__Values__Id__3587F3E0">
+            <End Role="Senzori" EntitySet="Senzoris" />
+            <End Role="Values" EntitySet="Values" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IrigationDBModelStoreContainer" CdmEntityContainer="IrigationDBEntities">
+          <EntitySetMapping Name="Senzoris">
+            <EntityTypeMapping TypeName="IrigationDBModel.Senzori">
+              <MappingFragment StoreEntitySet="Senzori">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Locatie" ColumnName="Locatie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Istorics">
+            <EntityTypeMapping TypeName="IrigationDBModel.Istoric">
+              <MappingFragment StoreEntitySet="Istoric">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="MedieTemperatura" ColumnName="MedieTemperatura" />
+                <ScalarProperty Name="MedieUmiditate" ColumnName="MedieUmiditate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Values">
+            <EntityTypeMapping TypeName="IrigationDBModel.Value">
+              <MappingFragment StoreEntitySet="Values">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Temperatura" ColumnName="Temperatura" />
+                <ScalarProperty Name="Umiditate" ColumnName="Umiditate" />
+                <ScalarProperty Name="Timestemp" ColumnName="Timestemp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
