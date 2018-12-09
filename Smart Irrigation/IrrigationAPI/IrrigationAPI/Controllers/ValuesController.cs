@@ -7,6 +7,8 @@ using System.Threading;
 using System.Net.Http;
 using System.Web.Http;
 using IrrigationAPI.Models;
+using System.Data.Entity;
+
 
 
 namespace IrrigationAPI.Controllers
@@ -21,6 +23,7 @@ namespace IrrigationAPI.Controllers
             using (IrigationDBEntities context = new IrigationDBEntities())
             {
                list = context.Values.ToList();
+                System.Diagnostics.Debugger.NotifyOfCrossThreadDependency();
                 return list;
             }
         }
