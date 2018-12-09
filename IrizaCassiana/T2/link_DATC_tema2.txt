@@ -1,0 +1,3 @@
+https://docs.microsoft.com/en-us/azure/app-service/app-service-web-overview
+https://en.wikipedia.org/wiki/Microsoft_Azure_Web_Sites
+https://docs.microsoft.com/en-us/azure/app-service/web-sites-configure&prev=search
