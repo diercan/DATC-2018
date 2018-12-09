@@ -12,6 +12,7 @@ namespace IrrigationAPI.Models
     using System;
     using System.Collections.Generic;
     
+    [Serializable]
     public partial class Istoric
     {
         public System.DateTime Data { get; set; }
