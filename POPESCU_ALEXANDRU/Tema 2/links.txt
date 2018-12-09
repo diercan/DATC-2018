@@ -1,0 +1,3 @@
+https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview 
+https://blogs.msdn.microsoft.com/azuredev/2018/08/29/azure-functions-and-serverless-computing/
+https://en.wikipedia.org/wiki/Serverless_computing 
