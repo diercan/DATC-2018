@@ -8,7 +8,7 @@ declare var google: any;
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss']
+  styleUrls: ['home.page.css']
 })
 export class HomePage {
   @ViewChild('map') public mapElement: ElementRef;
@@ -109,7 +109,18 @@ export class HomePage {
   private _infoWindowContent(indexMarker): string {
 
     return `<div style='width:200px;height:170px;'>
-              <button id='btn_marker'>${this.parkingSpaces[indexMarker].type}</button>
+              <h6> Loc parcare cu numarul ${this.parkingSpaces[indexMarker].id} </h6>
+              <p> Status : <b>${this.parkingSpaces[indexMarker].type == 'red' ? 'ocupat' : 'liber'}</b> </p>
+              <button style=' background-color: #3880ff; /* Green */
+                              border: none;
+                              color: white;
+                              padding: 10px 22px;
+                              text-align: center;
+                              border-radius: 6px;
+                              text-decoration: none;
+                              display: inline-block;
+                              font-size: 16px;'
+               id='btn_marker'> Click </button>
             </div>`;
   }
 }

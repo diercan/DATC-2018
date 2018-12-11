@@ -5,7 +5,7 @@ import { NavController, ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-contact',
   templateUrl: 'contact.page.html',
-  styleUrls: ['contact.page.scss']
+  styleUrls: ['contact.page.css']
 })
 export class ContactPage {
   constructor(

@@ -3,6 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-about',
   templateUrl: 'about.page.html',
-  styleUrls: ['about.page.scss']
+  styleUrls: ['about.page.css']
 })
 export class AboutPage {}

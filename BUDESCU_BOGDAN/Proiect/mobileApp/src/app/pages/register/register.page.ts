@@ -12,7 +12,7 @@ import { LoginPage } from '../login/login.page';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  styleUrls: ['./register.page.css'],
 })
 export class RegisterPage implements OnInit {
   public registerUserModel: Register = new Register("", "", "", "", "");
