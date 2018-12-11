@@ -4,10 +4,12 @@ import { Util } from './Util';
 import { UserDb } from './db/UserDb';
 import { Register } from './models/Register';
 import { Login } from './models/Login';
+import { ParkingDb } from './db/ParkingDb';
 
 export class AppRouter {
     public router: Router
     public userDb: UserDb;
+    public parkingDb: ParkingDb;
     public db: Db;
     public util: Util;
 
@@ -15,6 +17,7 @@ export class AppRouter {
         this.router = Router();
         this.db = new UserDb();
         this.userDb = new UserDb();
+        this.parkingDb = new ParkingDb();
         this.util = new Util();
         this.init();
     }
@@ -24,6 +27,7 @@ export class AppRouter {
 
         this.router.post("/api/users/register", await this.register.bind(this));
         this.router.post("/api/users/login", await this.login.bind(this));
+        this.router.get("/api/park/getParkingSpaces", await this.getParkingSpaces.bind(this));
         this.router.use(await this._isAuthorized.bind(this));
         this.router.post("/api/users/checkToken", await this.checkToken.bind(this));
         this.router.post("/api/users/logout", await this.logout.bind(this));
@@ -160,6 +164,19 @@ export class AppRouter {
         } else {
             res.status(400);
             res.json({ message: "Error trying to get data about User." });
+        }
+    }
+
+    public async getParkingSpaces(req: Request, res: Response, next: NextFunction) {
+
+        console.log("getParkingSpaces()")
+        let result: any = await this.parkingDb.getParkingSpaces();
+        if (result) {
+            res.status(200);
+            res.json({ data: result });
+        } else {
+            res.status(400);
+            res.json({ message: "Error trying to get data about parking system." });
         }
     }
 

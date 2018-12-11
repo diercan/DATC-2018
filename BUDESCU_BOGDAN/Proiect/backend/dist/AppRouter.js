@@ -11,11 +11,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const Util_1 = require("./Util");
 const UserDb_1 = require("./db/UserDb");
+const ParkingDb_1 = require("./db/ParkingDb");
 class AppRouter {
     constructor() {
         this.router = express_1.Router();
         this.db = new UserDb_1.UserDb();
         this.userDb = new UserDb_1.UserDb();
+        this.parkingDb = new ParkingDb_1.ParkingDb();
         this.util = new Util_1.Util();
         this.init();
     }
@@ -23,6 +25,7 @@ class AppRouter {
         return __awaiter(this, void 0, void 0, function* () {
             this.router.post("/api/users/register", yield this.register.bind(this));
             this.router.post("/api/users/login", yield this.login.bind(this));
+            this.router.get("/api/park/getParkingSpaces", yield this.getParkingSpaces.bind(this));
             this.router.use(yield this._isAuthorized.bind(this));
             this.router.post("/api/users/checkToken", yield this.checkToken.bind(this));
             this.router.post("/api/users/logout", yield this.logout.bind(this));
@@ -157,6 +160,20 @@ class AppRouter {
             else {
                 res.status(400);
                 res.json({ message: "Error trying to get data about User." });
+            }
+        });
+    }
+    getParkingSpaces(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("getParkingSpaces()");
+            let result = yield this.parkingDb.getParkingSpaces();
+            if (result) {
+                res.status(200);
+                res.json({ data: result });
+            }
+            else {
+                res.status(400);
+                res.json({ message: "Error trying to get data about parking system." });
             }
         });
     }
