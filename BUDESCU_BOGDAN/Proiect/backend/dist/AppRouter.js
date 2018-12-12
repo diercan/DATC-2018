@@ -12,6 +12,8 @@ const express_1 = require("express");
 const Util_1 = require("./Util");
 const UserDb_1 = require("./db/UserDb");
 const ParkingDb_1 = require("./db/ParkingDb");
+const Queue = require("better-queue");
+const { Worker, isMainThread, workerData } = require('worker_threads');
 class AppRouter {
     constructor() {
         this.router = express_1.Router();
@@ -19,9 +21,34 @@ class AppRouter {
         this.userDb = new UserDb_1.UserDb();
         this.parkingDb = new ParkingDb_1.ParkingDb();
         this.util = new Util_1.Util();
-        this.init();
+        this.initWorker();
+        this.initQueue();
+        this.initRoutes();
     }
-    init() {
+    initQueue() {
+        this.queue = new Queue((input, cb) => {
+            this.worker.postMessage({ data: input });
+            cb(null);
+        });
+    }
+    initWorker() {
+        let cb = (err, result) => {
+            if (err) {
+                return console.error(err);
+            }
+            console.log("Message From Worker: ", result.val);
+        };
+        this.worker = new Worker(__dirname + '/MyWorker.js', { workerData: null });
+        this.worker.on('message', (msg) => {
+            cb(null, msg);
+        });
+        this.worker.on('error', cb);
+        this.worker.on('exit', (code) => {
+            if (code != 0)
+                console.error(new Error(`Worker stopped with exit code ${code}`));
+        });
+    }
+    initRoutes() {
         return __awaiter(this, void 0, void 0, function* () {
             this.router.post("/api/users/register", yield this.register.bind(this));
             this.router.post("/api/users/login", yield this.login.bind(this));
@@ -167,6 +194,7 @@ class AppRouter {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("getParkingSpaces()");
             let result = yield this.parkingDb.getParkingSpaces();
+            this.queue.push(result[0]);
             if (result) {
                 res.status(200);
                 res.json({ data: result });

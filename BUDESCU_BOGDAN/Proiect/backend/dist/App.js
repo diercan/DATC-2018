@@ -41,7 +41,7 @@ class App {
     routes() {
         return __awaiter(this, void 0, void 0, function* () {
             let appRoutes = new AppRouter_1.AppRouter();
-            appRoutes.init();
+            appRoutes.initRoutes();
             this.express.use('/', appRoutes.router);
         });
     }

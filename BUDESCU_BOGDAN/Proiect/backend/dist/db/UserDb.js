@@ -141,7 +141,7 @@ class UserDb extends Db_1.Db {
                     resolve(false);
                 }
                 let sql = 'select * from UserSessions where AuthorizationToken = ?';
-                connection.query(sql, Token, (error, results, fields) => {
+                connection.query(sql, [Token], (error, results, fields) => {
                     connection.release();
                     if (error) {
                         console.log("mysql query err, " + error.message);

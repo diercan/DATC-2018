@@ -22,6 +22,7 @@
     "typescript": "^3.2.1"
   },
   "dependencies": {
+    "better-queue": "^3.8.10",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",

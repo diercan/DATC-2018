@@ -37,7 +37,7 @@ class App {
   // Configure API endpoints.
   private async routes() {
     let appRoutes = new AppRouter();
-    appRoutes.init();
+    appRoutes.initRoutes();
     this.express.use('/', appRoutes.router);
   }
 

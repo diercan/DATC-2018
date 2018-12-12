@@ -5,6 +5,8 @@ import { UserDb } from './db/UserDb';
 import { Register } from './models/Register';
 import { Login } from './models/Login';
 import { ParkingDb } from './db/ParkingDb';
+const Queue = require("better-queue");
+const { Worker, isMainThread, workerData } = require('worker_threads');
 
 export class AppRouter {
     public router: Router
@@ -13,17 +15,44 @@ export class AppRouter {
     public db: Db;
     public util: Util;
 
+    public queue: any;
+    public worker: any;
     constructor() {
         this.router = Router();
         this.db = new UserDb();
         this.userDb = new UserDb();
         this.parkingDb = new ParkingDb();
         this.util = new Util();
-        this.init();
+        this.initWorker();
+        this.initQueue();
+        this.initRoutes();
     }
 
+    private initQueue() {
+        this.queue = new Queue((input, cb) => {
+            this.worker.postMessage({ data: input });
+            cb(null);
+        });
+    }
 
-    public async init() {
+    private initWorker() {
+        let cb = (err, result) => {
+            if (err) { return console.error(err); }
+            console.log("Message From Worker: ", result.val);
+        };
+
+        this.worker = new Worker(__dirname + '/MyWorker.js', { workerData: null });
+        this.worker.on('message', (msg) => {
+            cb(null, msg)
+        })
+        this.worker.on('error', cb);
+        this.worker.on('exit', (code) => {
+            if (code != 0)
+                console.error(new Error(`Worker stopped with exit code ${code}`))
+        });
+    }
+
+    public async initRoutes() {
 
         this.router.post("/api/users/register", await this.register.bind(this));
         this.router.post("/api/users/login", await this.login.bind(this));
@@ -171,6 +200,7 @@ export class AppRouter {
 
         console.log("getParkingSpaces()")
         let result: any = await this.parkingDb.getParkingSpaces();
+        this.queue.push(result[0]);
         if (result) {
             res.status(200);
             res.json({ data: result });

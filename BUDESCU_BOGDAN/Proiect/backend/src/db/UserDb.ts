@@ -170,7 +170,7 @@ export class UserDb extends Db {
                     resolve(false);
                 }
                 let sql = 'select * from UserSessions where AuthorizationToken = ?';
-                connection.query(sql, Token, (error: MysqlError, results: any, fields: FieldInfo[]) => {
+                connection.query(sql, [Token], (error: MysqlError, results: any, fields: FieldInfo[]) => {
                     connection.release();
                     if (error) {
                         console.log("mysql query err, " + error.message);

@@ -9,13 +9,8 @@ var registerForEventListening = () => {
     let cb = (err, result) => {
         if (err) return console.error(err);
 
-        console.log("**** Task Received From Parent Thread: ", result, " ****");
-
-        //  setting up interval to call method to multiple with factor
-        if (index == -1) {
-            interval = setInterval(processDataAndSendData, 1000, "hello world from worker");
-        }
-        // processDataAndSendData()
+        console.log("****\nTask Received From Parent Thread: " + JSON.stringify(result) + "\n****");
+        processDataAndSendData();
     };
 
     // registering to events to receive messages from the main thread
@@ -30,11 +25,7 @@ function processDataAndSendData() {
 
     index++;
     console.log("WORKER ", index)
-    parentPort.postMessage({ index, val: "hello world from worker send val : " + index });
-    if (index == 10) {
-        clearInterval(interval);
-        parentPort.postMessage({ index, val: "Worker job done." });
-    }
+    // parentPort.postMessage({ index, val: "hello world from worker send val : " + index });
 }
 
 registerForEventListening();
