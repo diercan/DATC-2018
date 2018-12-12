@@ -1,0 +1,3 @@
+https://en.wikipedia.org/wiki/Service-oriented_architecture
+https://www.service-architecture.com/articles/web-services/service-oriented_architecture_soa_definition.html
+http://www.creeaza.com/referate/informatica/calculatoare/Arhitectura-software-SOA-Servi442.php
