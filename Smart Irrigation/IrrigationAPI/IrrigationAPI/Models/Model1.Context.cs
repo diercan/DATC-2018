@@ -18,6 +18,7 @@ namespace IrrigationAPI.Models
         public IrigationDBEntities()
             : base("name=IrigationDBEntities")
         {
+            
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
