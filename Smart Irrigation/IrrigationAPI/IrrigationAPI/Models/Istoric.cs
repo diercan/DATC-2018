@@ -18,5 +18,6 @@ namespace IrrigationAPI.Models
         public System.DateTime Data { get; set; }
         public Nullable<double> MedieTemperatura { get; set; }
         public Nullable<double> MedieUmiditate { get; set; }
+        public short Id_Istoric { get; set; }
     }
 }

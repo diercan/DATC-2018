@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -15,8 +16,6 @@ namespace IrrigationAPI.Controllers
 {
     public class ValuesController : ApiController
     {
-
-        // GET api/values
         public List<Value> Get()
         {
             List<Value> list = new List<Value>();
@@ -33,29 +32,33 @@ namespace IrrigationAPI.Controllers
         {
             using (IrigationDBEntities context = new IrigationDBEntities())
             {
-                Value value = context.Values.FirstOrDefault(v => v.Timestemp==timestemp);
+                Value value = context.Values.FirstOrDefault(v => v.Timestemp== timestemp);
                 return value;
             }
         }
 
         // GET api/values/5
+    
         public Value Get(int id)
         {
             using (IrigationDBEntities context = new IrigationDBEntities())
             {
-                Value value = context.Values.FirstOrDefault(v => v.Id == id);
+                Value value = context.Values.Include(val => val.Senzori).FirstOrDefault(val => val.Id_value == id);
                 return value;
             }
         }
 
         // POST api/values
-        public void Post(Value value)
+        public Value Post(Value value)
         {
             using (IrigationDBEntities context = new IrigationDBEntities())
             {
+                value.Timestemp = DateTime.Now;
+                value.Senzori = context.Senzoris.Include(sen => sen.Values).Where(sen => sen.Id == value.Id).First();
                 context.Values.Add(value);
                 context.SaveChanges();
             }
+            return value;
         }
 
         // PUT api/values/5

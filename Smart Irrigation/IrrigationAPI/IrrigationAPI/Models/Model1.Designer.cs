@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Sebii\Desktop\DATC-2018\Smart Irrigation\IrrigationAPI\IrrigationAPI\Models\Model1.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Pope\Desktop\Anu IV\datc\Datc\DATC-2018\Smart Irrigation\IrrigationAPI\IrrigationAPI\Models\Model1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

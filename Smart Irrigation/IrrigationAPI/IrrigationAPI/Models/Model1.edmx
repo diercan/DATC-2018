@@ -4,16 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="IrigationDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'IrigationDB.dbo.Istoric' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+    <Schema Namespace="IrigationDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Istoric">
           <Key>
-            <PropertyRef Name="Data" />
+            <PropertyRef Name="Id_Istoric" />
           </Key>
           <Property Name="Data" Type="date" Nullable="false" />
           <Property Name="MedieTemperatura" Type="float" />
           <Property Name="MedieUmiditate" Type="float" />
+          <Property Name="Id_Istoric" Type="int" StoreGeneratedPattern="None" Nullable="false" />
         </EntityType>
         <EntityType Name="Senzori">
           <Key>
@@ -22,19 +21,18 @@ warning 6002: The table/view 'IrigationDB.dbo.Istoric' does not have a primary k
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Locatie" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'IrigationDB.dbo.Values' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Values">
           <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Timestemp" />
+            <PropertyRef Name="Id_value" />
           </Key>
+          <Property Name="Id_value" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Temperatura" Type="float" />
           <Property Name="Umiditate" Type="float" />
           <Property Name="Timestemp" Type="datetime" Nullable="false" />
+          <Property Name="Pompa" Type="char" MaxLength="10" />
         </EntityType>
-        <Association Name="FK__Values__Id__3587F3E0">
+        <Association Name="FK__Values__Id__41EDCAC5">
           <End Role="Senzori" Type="Self.Senzori" Multiplicity="1" />
           <End Role="Values" Type="Self.Values" Multiplicity="*" />
           <ReferentialConstraint>
@@ -47,29 +45,15 @@ warning 6002: The table/view 'IrigationDB.dbo.Values' does not have a primary ke
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="IrigationDBModelStoreContainer">
+          <EntitySet Name="Istoric" EntityType="Self.Istoric" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Senzori" EntityType="Self.Senzori" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Istoric" EntityType="Self.Istoric" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Istoric].[Data] AS [Data], 
-    [Istoric].[MedieTemperatura] AS [MedieTemperatura], 
-    [Istoric].[MedieUmiditate] AS [MedieUmiditate]
-    FROM [dbo].[Istoric] AS [Istoric]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Values" EntityType="Self.Values" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Values].[Id] AS [Id], 
-    [Values].[Temperatura] AS [Temperatura], 
-    [Values].[Umiditate] AS [Umiditate], 
-    [Values].[Timestemp] AS [Timestemp]
-    FROM [dbo].[Values] AS [Values]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__Values__Id__3587F3E0" Association="Self.FK__Values__Id__3587F3E0">
+          <EntitySet Name="Values" EntityType="Self.Values" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Values__Id__41EDCAC5" Association="Self.FK__Values__Id__41EDCAC5">
             <End Role="Senzori" EntitySet="Senzori" />
             <End Role="Values" EntitySet="Values" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IrigationDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -83,22 +67,24 @@ warning 6002: The table/view 'IrigationDB.dbo.Values' does not have a primary ke
         </EntityType>
         <EntityType Name="Istoric">
           <Key>
-            <PropertyRef Name="Data" />
+            <PropertyRef Name="Id_Istoric" />
           </Key>
           <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="MedieTemperatura" Type="Double" />
           <Property Name="MedieUmiditate" Type="Double" />
+          <Property Name="Id_Istoric" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="Value">
           <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Timestemp" />
+            <PropertyRef Name="Id_value" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Temperatura" Type="Double" />
           <Property Name="Umiditate" Type="Double" />
           <Property Name="Timestemp" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Senzori" Relationship="Self.FK__Values__Id__3587F3E0" FromRole="Values" ToRole="Senzori" />
+          <Property Name="Id_value" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pompa" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
         </EntityType>
         <Association Name="FK__Values__Id__3587F3E0">
           <End Role="Senzori" Type="Self.Senzori" Multiplicity="1" />
@@ -138,6 +124,7 @@ warning 6002: The table/view 'IrigationDB.dbo.Values' does not have a primary ke
           <EntitySetMapping Name="Istorics">
             <EntityTypeMapping TypeName="IrigationDBModel.Istoric">
               <MappingFragment StoreEntitySet="Istoric">
+                <ScalarProperty Name="Id_Istoric" ColumnName="Id_Istoric" />
                 <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="MedieTemperatura" ColumnName="MedieTemperatura" />
                 <ScalarProperty Name="MedieUmiditate" ColumnName="MedieUmiditate" />
@@ -147,6 +134,8 @@ warning 6002: The table/view 'IrigationDB.dbo.Values' does not have a primary ke
           <EntitySetMapping Name="Values">
             <EntityTypeMapping TypeName="IrigationDBModel.Value">
               <MappingFragment StoreEntitySet="Values">
+                <ScalarProperty Name="Pompa" ColumnName="Pompa" />
+                <ScalarProperty Name="Id_value" ColumnName="Id_value" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Temperatura" ColumnName="Temperatura" />
                 <ScalarProperty Name="Umiditate" ColumnName="Umiditate" />
