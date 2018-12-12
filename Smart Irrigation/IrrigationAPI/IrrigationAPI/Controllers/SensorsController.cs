@@ -16,11 +16,10 @@ namespace IrrigationAPI.Controllers
     {
         public List<Senzori> Get()
         {
-            List<Senzori> list = new List<Senzori>();
             using (IrigationDBEntities context = new IrigationDBEntities())
             {
-                list = context.Senzoris.ToList();
-                System.Diagnostics.Debugger.NotifyOfCrossThreadDependency();
+                var list = context.Senzoris.Include(s => s.Values).ToList();
+               // list.ForEach(x => x.Senzori = null);
                 return list;
             }
         }

@@ -18,12 +18,11 @@ namespace IrrigationAPI.Controllers
     {
         public List<Value> Get()
         {
-            List<Value> list = new List<Value>();
             using (IrigationDBEntities context = new IrigationDBEntities())
             {
-               list = context.Values.ToList();
-                System.Diagnostics.Debugger.NotifyOfCrossThreadDependency();
-                return list;
+                var list = context.Values.Include(val => val.Senzori).ToList();
+                list.ForEach(x => x.Senzori = null);
+               return list;
             }
         }
 
@@ -43,7 +42,7 @@ namespace IrrigationAPI.Controllers
         {
             using (IrigationDBEntities context = new IrigationDBEntities())
             {
-                Value value = context.Values.Include(val => val.Senzori).FirstOrDefault(val => val.Id_value == id);
+                Value value = context.Values.Include(sel => sel.Senzori).Where(val => val.Id_value == id).First();
                 return value;
             }
         }
