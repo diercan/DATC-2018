@@ -1,0 +1,3 @@
+https://www.ktlsolutions.com/how-tos/nosql-azure-cosmos-db-and-documentdb/
+https://docs.microsoft.com/en-us/azure/cosmos-db/introduction
+https://docs.microsoft.com/en-us/azure/cosmos-db/use-cases#iot-and-telematics
