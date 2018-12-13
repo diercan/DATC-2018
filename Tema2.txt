@@ -1,0 +1,3 @@
+https://docs.microsoft.com/en-us/azure/sql-database/sql-database-elastic-pool
+https://docs.microsoft.com/en-us/azure/sql-database/sql-database-elastic-pool-manage
+https://vincentlauzon.com/2016/12/18/azure-sql-elastic-pool-overview/

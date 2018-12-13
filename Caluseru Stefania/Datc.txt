@@ -1,0 +1,5 @@
+
+https://auth0.com/docs/jwt
+https://en.wikipedia.org/wiki/OAuth
+https://en.wikipedia.org/wiki/OpenID
+
