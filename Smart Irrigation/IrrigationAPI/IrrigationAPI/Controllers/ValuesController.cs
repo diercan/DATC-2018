@@ -9,13 +9,18 @@ using System.Net.Http;
 using System.Web.Http;
 using IrrigationAPI.Models;
 using System.Data.Entity;
-
-
+using Newtonsoft;
+using Newtonsoft.Json;
+using Microsoft.Azure.ServiceBus;
 
 namespace IrrigationAPI.Controllers
 {
     public class ValuesController : ApiController
     {
+        const string ServiceBusConnectionString = "Endpoint=sb://irrigation.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=EM1mmXaWccHBM5+iSnBhUbaTT2e1pfd97Th/d9ODKzE=";
+        const string QueueName = "queue";
+        static IQueueClient queueClient;
+        
         public List<Value> Get()
         {
             using (IrigationDBEntities context = new IrigationDBEntities())
@@ -50,12 +55,20 @@ namespace IrrigationAPI.Controllers
         // POST api/values
         public Value Post(Value value)
         {
+            queueClient = new QueueClient(ServiceBusConnectionString, QueueName);
             using (IrigationDBEntities context = new IrigationDBEntities())
             {
+                                             
                 value.Timestemp = DateTime.Now;
-                value.Senzori = context.Senzoris.Include(sen => sen.Values).Where(sen => sen.Id == value.Id).First();
-                context.Values.Add(value);
-                context.SaveChanges();
+
+                string json = JsonConvert.SerializeObject(value);
+                byte[] messageBody = Encoding.Unicode.GetBytes(json);
+                queueClient.SendAsync(new Message(messageBody));
+
+
+                //value.Senzori = context.Senzoris.Include(sen => sen.Values).Where(sen => sen.Id == value.Id).First();
+               // context.Values.Add(value);
+               // context.SaveChanges();
             }
             return value;
         }
