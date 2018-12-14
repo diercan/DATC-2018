@@ -1,0 +1,12 @@
+sTema 1 - Szabo Agota-Hella
+1. PHP UK Conference 2017 - Terrence Ryan - Serving 30,000,000 Requests an Hour in the Cloud
+https://www.youtube.com/watch?v=xbVWbWo31pk
+
+2. Rest API
+https://www.youtube.com/watch?v=7YcW25PHnAA
+
+3. OAuth
+https://www.youtube.com/watch?v=996OiexHze0
+
+Ceva interesant in plus:
+What is an API? => https://www.youtube.com/watch?v=s7wmiS2mSXY

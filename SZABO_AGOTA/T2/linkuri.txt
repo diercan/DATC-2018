@@ -1,0 +1,3 @@
+1.	https://www.mongodb.com/containers-and-orchestration-explained
+2.	https://www.hpe.com/emea_europe/en/what-is/container-orchestration.html# 
+3.	https://docs.docker.com/
