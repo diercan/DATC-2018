@@ -1,0 +1,4 @@
+Cîrlea Cosmin - Tema 1 DATC
+HTTP basic: https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol
+HTTPS: https://www.geeksforgeeks.org/whats-difference-http-https/ 
+HTTP simplificat: https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
