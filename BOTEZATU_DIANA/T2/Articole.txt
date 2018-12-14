@@ -1,0 +1,3 @@
+http://cloudcomputing.wikispaces.asu.edu/Data+partitioning+or+distribution+schemes+in+SaaS+or+PaaS
+https://docs.microsoft.com/en-us/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/data-partitioning-strategies
+https://docs.microsoft.com/en-us/azure/architecture/best-practices/data-partitioning
