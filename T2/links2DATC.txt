@@ -1,0 +1,3 @@
+https://docs.microsoft.com/en-us/azure/sql-database/sql-database-elastic-pool
+https://www.petri.com/azure-sql-elastic-pool-single-databases-dtus
+https://stackify.com/sql-azure-elastic-pool-product-review/
