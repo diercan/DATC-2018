@@ -1,0 +1,5 @@
+https://stackify.com/what-is-azure-cosmos-db/
+
+https://medium.com/xplenty-blog/the-sql-vs-nosql
+
+https://www.ontotext.com/knowledgehub/fundamentals/nosql-graph-database/
