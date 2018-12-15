@@ -1,0 +1,3 @@
+https://www.cvm.com/redundancy-in-the-cloud/
+https://blogs.msdn.microsoft.com/plankytronixx/2015/05/01/azure-exam-prep-fault-domains-and-update-domains/
+https://www.c-sharpcorner.com/article/availability-set-fault-domains-and-update-domains-in-azure-virtual-machie/
