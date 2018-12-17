@@ -20,7 +20,7 @@ namespace ArduinoHumidityCheck
         {
             InitializeComponent();
             serialPort1.BaudRate = 9600;
-            serialPort1.PortName = "COM7";
+            serialPort1.PortName = "COM3";    //"COM7";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -33,6 +33,7 @@ namespace ArduinoHumidityCheck
             try
             {
                 serialPort1.Open();
+                MessageBox.Show("Started!");
             }
             catch (Exception ex)
             {
@@ -54,7 +55,7 @@ namespace ArduinoHumidityCheck
         {
             string msgToSend = "";
             msgToSend = serialPort1.ReadExisting().ToString();
-            msgToSend = "humidity=" + msgToSend;
+            //msgToSend = "humidity=" + msgToSend;
             /*if (richTextBox1.InvokeRequired)
             {
                 richTextBox1.Invoke((MethodInvoker)delegate ()
