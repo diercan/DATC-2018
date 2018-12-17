@@ -1,0 +1,12 @@
+C:\Users\plesd\Desktop\datc\datc\datc\bin\Debug\datc.exe.config
+C:\Users\plesd\Desktop\datc\datc\datc\bin\Debug\datc.exe
+C:\Users\plesd\Desktop\datc\datc\datc\bin\Debug\datc.pdb
+C:\Users\plesd\Desktop\datc\datc\datc\obj\Debug\datc.csprojResolveAssemblyReference.cache
+C:\Users\plesd\Desktop\datc\datc\datc\obj\Debug\datc.Form1.resources
+C:\Users\plesd\Desktop\datc\datc\datc\obj\Debug\datc.Properties.Resources.resources
+C:\Users\plesd\Desktop\datc\datc\datc\obj\Debug\datc.csproj.GenerateResource.Cache
+C:\Users\plesd\Desktop\datc\datc\datc\obj\Debug\datc.exe
+C:\Users\plesd\Desktop\datc\datc\datc\obj\Debug\datc.pdb
+C:\Users\depl271266\Desktop\datc\datc\datc\datc\bin\Debug\datc.exe.config
+C:\Users\depl271266\Desktop\datc\datc\datc\datc\obj\Debug\datc.exe
+C:\Users\depl271266\Desktop\datc\datc\datc\datc\obj\Debug\datc.pdb
