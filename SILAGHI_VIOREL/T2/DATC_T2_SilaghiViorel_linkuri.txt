@@ -1,0 +1,3 @@
+https://www.reply.com/solidsoft-reply/en/content/serverless-computing-with-azure-functions
+https://www.todaysoftmag.ro/article/2201/serverless-computing-folosind-azure-functions
+https://azure.microsoft.com/en-us/overview/serverless-computing/
