@@ -25,7 +25,7 @@
       </ion-item-options>
   
       <ion-item-options side="right">
-        <button color="secondary" ion-button (click)="ocupaLoc(p)">Ocupa loc</button>
+        <button color="secondary" ion-button (click)="ocupaLoc(p)">{{p.IdParcare == 1 ? "Situatie locuri" : "Ocupa loc"}}</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

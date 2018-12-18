@@ -59,4 +59,23 @@ export class ParcariPage {
     const modal = this.modalCtrl.create('HartaModal', { locatie: loc });
     modal.present();
   }
+
+  ocupaLoc(p) {
+    const modal = this.modalCtrl.create('OcupaLocModal', { parcare: p });
+    modal.present();
+
+    modal.onDidDismiss((data) => {
+      if(data) {
+        var route = "api/put/parcari/" + data.id + "/pozitie/" + data.pozitie + "/valoare/" + data.valoare;
+        this.requests.put(route, null).subscribe(data => {
+          
+        }, error => {
+          if (error.status = "404") {}
+          console.log('Eroare! S-a intamplat ceva la request-ul pentru luarea parcarilor!');
+        }, () => {
+          this.getParcari();
+        })
+      }
+    })
+  }
 }

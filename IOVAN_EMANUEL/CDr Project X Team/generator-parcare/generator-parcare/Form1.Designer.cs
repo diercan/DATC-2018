@@ -114,7 +114,7 @@
             this.groupBox1.Size = new System.Drawing.Size(220, 144);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Genereaza locuri la o parcare existenta";
+            this.groupBox1.Text = "Regenereaza locuri la o parcare existenta";
             // 
             // txt_id_parcare
             // 

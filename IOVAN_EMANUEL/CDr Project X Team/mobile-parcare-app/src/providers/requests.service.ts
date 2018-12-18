@@ -26,6 +26,15 @@ export class RequestsService {
             { headers: headers })
     .map(res => res.json());
   }
+
+  put(route, model){
+    var headers = new Headers();
+    headers.append('Accept','application/json');
+    headers.append('Content-type','application/json');
+    return this.http.put(this.globals.serviceBase + route, model,
+            { headers: headers })
+    .map(res => res.json());
+  }
   
   post(route, model){
     var headers = new Headers();

@@ -1,0 +1,44 @@
+<ion-header class="header header-ios">
+    <ion-navbar>
+        <ion-title>Ocupa Loc</ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="inchide()">
+                <ion-label>Inchide</ion-label>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <h4>&nbsp;Situatia locurilor</h4>
+    <p>&nbsp;{{parcare.LocatieParcare}}</p>
+    <ion-row *ngIf="parcare.IdParcare != 1">
+        <ion-col col-6 *ngFor="let loc of parcare.StareLocuriArray; let i = index">
+            <ion-row>
+                <ion-col (click)="updateParcare(parcare.IdParcare, i, loc)" text-center class="loc-parcare min-height">
+                    {{i}}
+                    <ion-icon class="masina-in-parcare" *ngIf="loc == 1" name="car"></ion-icon>
+                </ion-col>
+                
+                <ion-col class="linie-drum" text-center>
+                    |
+                </ion-col>
+            </ion-row>            
+        </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="parcare.IdParcare == 1">
+        <ion-col col-12 *ngFor="let loc of parcare.StareLocuriArray; let i = index">
+            <ion-row>
+                <ion-col text-center class="loc-parcare min-height">
+                    {{i}}
+                    <ion-icon class="masina-in-parcare" *ngIf="loc == 1" name="car"></ion-icon>
+                </ion-col>
+                
+                <ion-col class="linie-drum" text-center>
+                    |
+                </ion-col>
+            </ion-row>            
+        </ion-col>
+    </ion-row>
+</ion-content>

@@ -7,6 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { GlobalsService } from '../providers/globals.service';
 import { RequestsService } from '../providers/requests.service';
 import { HttpModule } from '@angular/http';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { HttpModule } from '@angular/http';
     SplashScreen,
     GlobalsService,
     RequestsService,
+    EmailComposer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

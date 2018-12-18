@@ -15,5 +15,6 @@ export class GlobalsService {
 
     constructor() {
         this.serviceBase = "http://localhost:56531/";
+        //this.serviceBase = "https://cdrxapiworker.azurewebsites.net/";
     }
 }

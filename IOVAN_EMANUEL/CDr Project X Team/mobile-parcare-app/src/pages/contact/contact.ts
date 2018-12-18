@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 @IonicPage({
   priority: 'off'
@@ -10,8 +11,17 @@ import { NavController, IonicPage } from 'ionic-angular';
 })
 export class ContactPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,
+              private emailComposer: EmailComposer) {
 
   }
 
+  trimiteMail() {
+    let email = {
+      to: 'emiiovan@clinicdr.com',
+      subject: '[CDr X Project]'
+    };
+  
+    this.emailComposer.open(email);
+  }
 }

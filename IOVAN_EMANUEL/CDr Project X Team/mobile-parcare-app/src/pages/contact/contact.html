@@ -6,12 +6,20 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
+<ion-content padding>
+  <h4>Contactati-ne prin e-mail</h4>
+  <ion-list no-margin>
+    <ion-item no-padding>
+      <ion-label floating>E-mailul dumneavoastra</ion-label>
+      <ion-input type="text" [(ngModel)]="email"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding>
+      <ion-label floating>Mesaj</ion-label>
+      <ion-textarea [(ngModel)]="mesaj"></ion-textarea>
     </ion-item>
   </ion-list>
+
+  <div margin-top class="informational-note">Dupa trimiterea e-mailului, veti fi contactat in cel mai scurt timp de catre un membru al echipei noastre. Va multumim!</div>
+  <button margin-top ion-button block outline color="dark" (click)="trimiteMail()">Trimite e-mail</button>
 </ion-content>

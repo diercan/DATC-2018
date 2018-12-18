@@ -1,5 +1,7 @@
 {
   "name": "mobile-parcare-app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }
