@@ -20,3 +20,6 @@ C:\Users\andra\Desktop\PROIECT DATC\Generare_Date\GenerateData\GenerateData\bin\
 C:\Users\andra\Desktop\PROIECT DATC\Generare_Date\GenerateData\GenerateData\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\andra\Desktop\PROIECT DATC\Generare_Date\GenerateData\GenerateData\bin\Debug\Newtonsoft.Json.xml
 C:\Users\andra\Desktop\PROIECT DATC\Generare_Date\GenerateData\GenerateData\bin\Debug\System.Data.SQLite.xml
+C:\Users\andra\Documents\GitHub\DATC-2018\Proiect DATC\GenerateData\bin\Debug\GenerateData.exe.config
+C:\Users\andra\Documents\GitHub\DATC-2018\Proiect DATC\GenerateData\obj\Debug\GenerateData.exe
+C:\Users\andra\Documents\GitHub\DATC-2018\Proiect DATC\GenerateData\obj\Debug\GenerateData.pdb

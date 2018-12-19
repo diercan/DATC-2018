@@ -31,6 +31,40 @@ namespace GenerateData
 
         }
 
+        public void reload_Parking_Spot_Status()
+        {
+            for (int i = 0; i < polygon1s.Polygons.Count(); i++)
+            {
+                string query = "SELECT spotStatus FROM park WHERE spotID = " + i;
+
+                using (SqlCommand command = new SqlCommand(query, cnn))
+                    try
+                    {
+                        //int s = command.ExecuteNonQuery(); //Update
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                if (Convert.ToBoolean(reader["spotStatus"]) == true) //Ocupat
+                                {
+                                    polygon1s.Polygons[i].Fill = new SolidBrush(Color.Red);
+                                }
+                                else
+                                {
+                                    polygon1s.Polygons[i].Fill = new SolidBrush(Color.GreenYellow);
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+            }
+            map.Overlays.Clear();
+            map.Overlays.Add(polygon1s);
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             map.DragButton = MouseButtons.Left;
@@ -45,59 +79,23 @@ namespace GenerateData
             map.MapProvider = GMapProviders.GoogleSatelliteMap;
             double lat = 45.7469724380169;
             double longt = 21.2366393208504;
-            
+
             map.Position = new GMap.NET.PointLatLng(lat, longt);
             map.Zoom = 10;
             map.MinZoom = 5;
             map.MaxZoom = 1000;
 
-            for(int i = 0; i < polygon1s.Polygons.Count(); i ++)
-            {
-                string query = "SELECT spotStatus FROM park WHERE spotID = " + i;
-
-                using (SqlCommand command = new SqlCommand(query, cnn))
-                    try
-                    {
-                        //int s = command.ExecuteNonQuery(); //Update
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                if(Convert.ToBoolean(reader["spotStatus"]) == true) //Ocupat
-                                {
-                                    polygon1s.Polygons[i].Fill = new SolidBrush(Color.Red);
-                                }
-                                else
-                                {
-                                    polygon1s.Polygons[i].Fill = new SolidBrush(Color.GreenYellow);
-                                }
-                            }
-                        }
-                    }
-                    catch
-                    {
-                        
-                    }
-            }
+            reload_Parking_Spot_Status();
 
         }
 
-        public void init_Parking_Status()
-        {
-            
-        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            int status = -1;
             Random rnd = new Random();
-            int parkingSpot1 = rnd.Next(9);
-            int parkingSpot2 = rnd.Next(9);
-            int parkingSpot3 = rnd.Next(9);
-            int ps1State = rnd.Next(2);
-            int ps2State = rnd.Next(2);
-            int ps3State = rnd.Next(2);
-            string query = "SELECT spotStatus FROM park WHERE spotID = 0";
-
+            int parkingSpot1 = rnd.Next(0, 9);
+            string query = "SELECT spotStatus FROM park WHERE spotID = " + parkingSpot1;
             using (SqlCommand command = new SqlCommand(query, cnn))
                 try
                 {
@@ -106,16 +104,49 @@ namespace GenerateData
                     {
                         if (reader.Read())
                         {
-                            MessageBox.Show(String.Format("{0}", reader["spotStatus"]));
+                            status = Convert.ToInt16(reader["spotStatus"]);
                         }
                     }
-                    MessageBox.Show("PASS");
-
                 }
                 catch
                 {
-                    MessageBox.Show("FAIL");
+
                 }
+
+            if (status == 1)
+            {
+                status = 0;
+            }
+            else
+            {
+                status = 1;
+            }
+
+            if (status == 1)
+                MessageBox.Show("Parking spot nr. " + (parkingSpot1 + 1) + " is now BUSY!");
+            else
+                MessageBox.Show("Parking spot nr. " + (parkingSpot1 + 1) + " is now AVAILABLE!");
+
+
+            query = "UPDATE park SET spotStatus = " + status + " WHERE spotID = " + parkingSpot1;
+            using (SqlCommand command = new SqlCommand(query, cnn))
+                try
+                {
+                    //int s = command.ExecuteNonQuery(); //Update
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            status = Convert.ToInt16(reader["spotStatus"]);
+                        }
+                    }
+                }
+                catch
+                {
+
+                }
+
+            reload_Parking_Spot_Status();
         }
 
         private void map_Load(object sender, EventArgs e)
