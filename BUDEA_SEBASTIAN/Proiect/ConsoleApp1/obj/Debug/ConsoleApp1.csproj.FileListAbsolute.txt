@@ -1,0 +1,19 @@
+C:\Users\diana\source\repos\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+C:\Users\diana\source\repos\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+C:\Users\diana\source\repos\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+C:\Users\diana\source\repos\ConsoleApp1\obj\Debug\ConsoleApp1.csprojAssemblyReference.cache
+C:\Users\diana\source\repos\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+C:\Users\diana\source\repos\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+C:\Users\diana\source\repos\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+C:\Users\Sebi\Documents\an 2 sem 1\Anul IV-IS\DATC\Proiect\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+C:\Users\Sebi\Documents\an 2 sem 1\Anul IV-IS\DATC\Proiect\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+C:\Users\Sebi\Documents\an 2 sem 1\Anul IV-IS\DATC\Proiect\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+C:\Users\Sebi\Documents\an 2 sem 1\Anul IV-IS\DATC\Proiect\ConsoleApp1\obj\Debug\ConsoleApp1.csprojAssemblyReference.cache
+C:\Users\Sebi\Documents\an 2 sem 1\Anul IV-IS\DATC\Proiect\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+C:\Users\Sebi\Documents\an 2 sem 1\Anul IV-IS\DATC\Proiect\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+C:\Users\Sebi\Documents\an 2 sem 1\Anul IV-IS\DATC\Proiect\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+C:\Users\Sebi\Documents\an 2 sem 1\Anul IV-IS\DATC\Proiect\ConsoleApp1\bin\Debug\Google.Protobuf.dll
+C:\Users\Sebi\Documents\an 2 sem 1\Anul IV-IS\DATC\Proiect\ConsoleApp1\bin\Debug\MySql.Data.dll
+C:\Users\Sebi\Documents\an 2 sem 1\Anul IV-IS\DATC\Proiect\ConsoleApp1\bin\Debug\Google.Protobuf.xml
+C:\Users\Sebi\Documents\an 2 sem 1\Anul IV-IS\DATC\Proiect\ConsoleApp1\bin\Debug\MySql.Data.xml
+C:\Users\Sebi\Documents\an 2 sem 1\Anul IV-IS\DATC\Proiect\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CopyComplete
