@@ -79,7 +79,7 @@ export class UserDb extends Db {
                     console.log("conn err, " + err.message);
                     resolve(false);
                 }
-                let sql = "select Id, FirstName, LastName, Email from Users where Id = ?";
+                let sql = "select Id, FirstName, LastName, Email, Photo from Users where Id = ?";
                 connection.query(sql,
                     Id,
                     (error: MysqlError, results: any, fields: FieldInfo[]) => {
@@ -108,7 +108,7 @@ export class UserDb extends Db {
                     console.log("conn err, " + err.message);
                     resolve(false);
                 }
-                let sql = "select Users.Id, Users.Email, Users.FirstName, Users.LastName from UserSessions, Users where UserSessions.AuthorizationToken = ? and UserSessions.UserId = Users.Id";
+                let sql = "select Users.Id, Users.Email, Users.FirstName, Users.LastName, Users.Photo from UserSessions, Users where UserSessions.AuthorizationToken = ? and UserSessions.UserId = Users.Id";
                 connection.query(sql,
                     Token,
                     (error: MysqlError, results: any, fields: FieldInfo[]) => {
@@ -205,4 +205,35 @@ export class UserDb extends Db {
         });
     }
 
+    public setUserPhoto(UserId, FileName){
+
+        return new Promise((resolve, reject) => {
+            this.pool.getConnection((err: MysqlError, connection: PoolConnection) => {
+                if (err) {
+                    console.log("conn err, " + err.message);
+                    resolve(false);
+                }
+                let sql = "update Users set Photo = ? where Id = ?";
+                connection.query(sql,
+                    [
+                        FileName,
+                        UserId
+                    ],
+                    (error: MysqlError, results: any, fields: FieldInfo[]) => {
+                        connection.release();
+                        if (error) {
+                            console.log("mysql query err, ", {
+                                code: error.code,
+                                errno: error.code,
+                                message: error.message,
+                                sql: error.sql
+                            });
+                            resolve(false);
+                        }
+
+                        resolve(results);
+                    })
+            })
+        })
+    }
 }

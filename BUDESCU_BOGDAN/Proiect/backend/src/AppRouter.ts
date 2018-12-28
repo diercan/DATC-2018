@@ -7,6 +7,9 @@ import { Login } from './models/Login';
 import { ParkingDb } from './db/ParkingDb';
 const Queue = require("better-queue");
 const { Worker, isMainThread, workerData } = require('worker_threads');
+import * as Queue from 'better-queue';
+import * as fs from 'fs'
+import * as formidable from 'formidable';
 
 export class AppRouter {
     public router: Router
@@ -61,6 +64,8 @@ export class AppRouter {
         this.router.post("/api/users/checkToken", await this.checkToken.bind(this));
         this.router.post("/api/users/logout", await this.logout.bind(this));
         this.router.post("/api/users/getData", await this.getData.bind(this));
+        this.router.post("/api/files/upload", await this.uploadFile.bind(this));
+
     }
 
     private async _isAuthorized(req: Request, res: Response, next: NextFunction) {
@@ -210,4 +215,24 @@ export class AppRouter {
         }
     }
 
+    public async uploadFile(req: Request, res: Response, next: NextFunction) {
+
+        console.log("uploadFile()")
+        let userData: any = await this.userDb.findUserByToken(req.headers.authorization);
+        let form = new formidable.IncomingForm();
+        form.uploadDir = "./uploaded_files"
+        form.parse(req, (err, fields, files) => { });
+
+        form.on('file', (name, file) => {
+            let oldpath = file.path;
+            let filename = this.util.guidGenerator() + "." + file.type.split("/")[1];
+            let newpath = "./uploaded_files/" + filename;
+            this.userDb.setUserPhoto(userData[0].Id, filename).then(() => {
+                fs.rename(oldpath, newpath, (err) => {
+                    if (err) throw err;
+                    res.json({ FileName: filename });
+                });
+            })
+        });
+    }
 }

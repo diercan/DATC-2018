@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const crypto_1 = require("crypto");
 const fs_1 = require("fs");
 const jwt = require("jsonwebtoken");
+const uuid = require("uuid/v1");
 class Util {
     constructor() {
         // var input = "testing";
@@ -84,6 +85,9 @@ class Util {
     }
     JWTDecode(token) {
         return jwt.decode(token, { complete: true });
+    }
+    guidGenerator() {
+        return uuid();
     }
 }
 exports.Util = Util;

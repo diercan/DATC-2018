@@ -32,6 +32,7 @@ class App {
             next();
         }
     });
+    this.express.use("/api", express.static('uploaded_files'));
   }
 
   // Configure API endpoints.

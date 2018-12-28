@@ -14,6 +14,8 @@ const UserDb_1 = require("./db/UserDb");
 const ParkingDb_1 = require("./db/ParkingDb");
 const Queue = require("better-queue");
 const { Worker, isMainThread, workerData } = require('worker_threads');
+const fs = require("fs");
+const formidable = require("formidable");
 class AppRouter {
     constructor() {
         this.router = express_1.Router();
@@ -57,6 +59,7 @@ class AppRouter {
             this.router.post("/api/users/checkToken", yield this.checkToken.bind(this));
             this.router.post("/api/users/logout", yield this.logout.bind(this));
             this.router.post("/api/users/getData", yield this.getData.bind(this));
+            this.router.post("/api/files/upload", yield this.uploadFile.bind(this));
         });
     }
     _isAuthorized(req, res, next) {
@@ -203,6 +206,27 @@ class AppRouter {
                 res.status(400);
                 res.json({ message: "Error trying to get data about parking system." });
             }
+        });
+    }
+    uploadFile(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("uploadFile()");
+            let userData = yield this.userDb.findUserByToken(req.headers.authorization);
+            let form = new formidable.IncomingForm();
+            form.uploadDir = "./uploaded_files";
+            form.parse(req, (err, fields, files) => { });
+            form.on('file', (name, file) => {
+                let oldpath = file.path;
+                let filename = this.util.guidGenerator() + "." + file.type.split("/")[1];
+                let newpath = "./uploaded_files/" + filename;
+                this.userDb.setUserPhoto(userData[0].Id, filename).then(() => {
+                    fs.rename(oldpath, newpath, (err) => {
+                        if (err)
+                            throw err;
+                        res.json({ FileName: filename });
+                    });
+                });
+            });
         });
     }
 }

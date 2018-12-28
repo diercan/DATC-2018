@@ -1,6 +1,7 @@
 import { randomBytes, createCipher, createDecipher, pbkdf2Sync } from "crypto";
 import { fstat, readFileSync, readFile } from 'fs';
 import * as jwt from "jsonwebtoken";
+import * as uuid from 'uuid/v1';
 
 export class Util {
     private readonly ALGORITHM: string = "AES-256-CBC";
@@ -98,5 +99,9 @@ export class Util {
 
     public JWTDecode(token) {
         return jwt.decode(token, { complete: true });
+    }
+
+    public guidGenerator() {
+        return uuid();
     }
 }
