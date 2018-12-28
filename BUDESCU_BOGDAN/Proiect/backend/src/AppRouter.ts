@@ -10,11 +10,14 @@ const { Worker, isMainThread, workerData } = require('worker_threads');
 import * as Queue from 'better-queue';
 import * as fs from 'fs'
 import * as formidable from 'formidable';
+import { ReservationsDb } from './db/ReservationsDb';
+import { Reservation } from './models/Reservation';
 
 export class AppRouter {
     public router: Router
     public userDb: UserDb;
     public parkingDb: ParkingDb;
+    public reservationDb: ReservationsDb;
     public db: Db;
     public util: Util;
 
@@ -25,6 +28,7 @@ export class AppRouter {
         this.db = new UserDb();
         this.userDb = new UserDb();
         this.parkingDb = new ParkingDb();
+        this.reservationDb = new ReservationsDb();
         this.util = new Util();
         this.initWorker();
         this.initQueue();
@@ -65,7 +69,9 @@ export class AppRouter {
         this.router.post("/api/users/logout", await this.logout.bind(this));
         this.router.post("/api/users/getData", await this.getData.bind(this));
         this.router.post("/api/files/upload", await this.uploadFile.bind(this));
-
+        this.router.post("/api/reservations/create", await this.createReservation.bind(this));
+        this.router.get("/api/reservations/getReservations", await this.getReservations.bind(this));
+        this.router.get("/api/reservations/getReservationsByUserId", await this.getReservationsByUserId.bind(this));
     }
 
     private async _isAuthorized(req: Request, res: Response, next: NextFunction) {
@@ -234,5 +240,29 @@ export class AppRouter {
                 });
             })
         });
+    }
+
+    public async createReservation(req: Request, res: Response, next: NextFunction) {
+
+        console.log("getParkingSpaces()")
+        let userData: any = await this.userDb.findUserByToken(req.headers.authorization);
+        let reservation: Reservation = new Reservation(req.body.ParkId, userData[0].Id, req.body.StartDate, req.body.EndDate);
+        let result: any = await this.reservationDb.createReservation(reservation);
+        res.json(result.insertId)
+    }
+
+    public async getReservations(req: Request, res: Response, next: NextFunction) {
+       
+        console.log("getReservations()")
+        let results = await this.reservationDb.getReservations();
+        res.json(results)
+    }
+
+    public async getReservationsByUserId(req: Request, res: Response, next: NextFunction) {
+       
+        console.log("getReservationsByUserId()")
+        let userData: any = await this.userDb.findUserByToken(req.headers.authorization);
+        let results = await this.reservationDb.getReservationsByUserId(userData[0].Id);
+        res.json(results)
     }
 }

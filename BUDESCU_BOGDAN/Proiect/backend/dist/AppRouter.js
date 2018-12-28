@@ -16,12 +16,15 @@ const Queue = require("better-queue");
 const { Worker, isMainThread, workerData } = require('worker_threads');
 const fs = require("fs");
 const formidable = require("formidable");
+const ReservationsDb_1 = require("./db/ReservationsDb");
+const Reservation_1 = require("./models/Reservation");
 class AppRouter {
     constructor() {
         this.router = express_1.Router();
         this.db = new UserDb_1.UserDb();
         this.userDb = new UserDb_1.UserDb();
         this.parkingDb = new ParkingDb_1.ParkingDb();
+        this.reservationDb = new ReservationsDb_1.ReservationsDb();
         this.util = new Util_1.Util();
         this.initWorker();
         this.initQueue();
@@ -60,6 +63,9 @@ class AppRouter {
             this.router.post("/api/users/logout", yield this.logout.bind(this));
             this.router.post("/api/users/getData", yield this.getData.bind(this));
             this.router.post("/api/files/upload", yield this.uploadFile.bind(this));
+            this.router.post("/api/reservations/create", yield this.createReservation.bind(this));
+            this.router.get("/api/reservations/getReservations", yield this.getReservations.bind(this));
+            this.router.get("/api/reservations/getReservationsByUserId", yield this.getReservationsByUserId.bind(this));
         });
     }
     _isAuthorized(req, res, next) {
@@ -227,6 +233,30 @@ class AppRouter {
                     });
                 });
             });
+        });
+    }
+    createReservation(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("getParkingSpaces()");
+            let userData = yield this.userDb.findUserByToken(req.headers.authorization);
+            let reservation = new Reservation_1.Reservation(req.body.ParkId, userData[0].Id, req.body.StartDate, req.body.EndDate);
+            let result = yield this.reservationDb.createReservation(reservation);
+            res.json(result.insertId);
+        });
+    }
+    getReservations(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("getReservations()");
+            let results = yield this.reservationDb.getReservations();
+            res.json(results);
+        });
+    }
+    getReservationsByUserId(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("getReservationsByUserId()");
+            let userData = yield this.userDb.findUserByToken(req.headers.authorization);
+            let results = yield this.reservationDb.getReservationsByUserId(userData[0].Id);
+            res.json(results);
         });
     }
 }
