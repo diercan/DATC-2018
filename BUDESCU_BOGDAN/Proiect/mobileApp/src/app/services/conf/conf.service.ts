@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class ConfService {
 
-  public readonly BASE_URL: string = "http://localhost:3000/api";
+  public readonly BASE_URL: string = "http://192.168.16.106:8081/api";
+  //"http://185.104.180.158:8081/api";
   public readonly PARKING_SPACES: any[] =
     [
       {
@@ -112,5 +113,12 @@ export class ConfService {
       }
 
     ];
-  constructor() { }
+  constructor() {
+
+    // for (let i = 0; i < this.PARKING_SPACES.length; i++) {
+    //   const element = this.PARKING_SPACES[i];
+    //   console.log(`insert into ParkingSpaces values (${element.id}, ${element.lat}, ${element.lng}, "${element.type}", 0);`)
+    // }
+   }
 }
+

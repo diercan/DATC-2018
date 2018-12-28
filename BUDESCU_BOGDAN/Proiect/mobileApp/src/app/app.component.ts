@@ -27,11 +27,14 @@ export class AppComponent {
       this.splashScreen.hide();
       this._auth.checkToken().subscribe((data: any) => {
         console.log(data)
+        this._auth.isLogged = true;
         this._router.navigateByUrl('tabs')
         this._auth.userData = data.userData;
       }, (err) => {
+        this._auth.isLogged = false;
         this._router.navigateByUrl('login')
         localStorage.removeItem("token")
+
       })
     });
   }

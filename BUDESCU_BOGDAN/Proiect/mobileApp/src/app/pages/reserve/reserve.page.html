@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Loc de parcare nr {{Id}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        Start
+      </ion-col>
+      <ion-col>
+        <ion-datetime [(ngModel)]="startDate" display-format="MMM DD, YYYY HH:mm" [min]="date" >--</ion-datetime>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        End
+      </ion-col>
+      <ion-col>
+        <ion-datetime [(ngModel)]="endDate"  display-format="MMM DD, YYYY HH:mm" [min]="date" [value]="date">--</ion-datetime>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button padding expand="block" (click)="reserve()">
+          Rezerva
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

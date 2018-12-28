@@ -11,7 +11,7 @@ import { Register } from 'src/app/models/Register';
 export class AuthService {
 
   // private readonly AUTH_KEY = localStorage.getItem("token");
-  public isLogged: boolean = localStorage.getItem("token") != null;
+  public isLogged: boolean;
   public userData: any;
   constructor(
     private _http: HttpClient,
@@ -28,15 +28,15 @@ export class AuthService {
       })
     };
     return this._http.post(`${this._cfg.BASE_URL}/users/login`, body, options);
- 
+
   }
-  
-  public logout(){
+
+  public logout() {
 
     let options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization':  localStorage.getItem("token")
+        'Authorization': localStorage.getItem("token")
       })
     };
     return this._http.post(`${this._cfg.BASE_URL}/users/logout`, null, options);
@@ -47,7 +47,7 @@ export class AuthService {
     let options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization':  localStorage.getItem("token")
+        'Authorization': localStorage.getItem("token")
       })
     };
     return this._http.post(`${this._cfg.BASE_URL}/users/checkToken`, null, options);

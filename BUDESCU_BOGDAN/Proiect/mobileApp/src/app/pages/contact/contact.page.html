@@ -9,7 +9,21 @@
 <ion-content>
   <ion-list text-center>
     <ion-grid *ngIf="auth.userData">
-      <ion-row >
+      <ion-row>
+        <ion-col>
+          <img [src]="imgPreview" [alt]="imgPreview" style="width:70%" />
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="upload-btn-wrapper">
+            <ion-icon style="font-size:35px;" color="primary" name="cloud-upload" for="t">
+            </ion-icon>
+            <input id="t" type="file" (change)="upload($event)" />
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
         <ion-col size="4">
           Nume
         </ion-col>
@@ -40,6 +54,8 @@
         </ion-col>
       </ion-row> -->
     </ion-grid>
+
+
     <ion-button padding expand="block" (click)="logout()">
       Logout
     </ion-button>

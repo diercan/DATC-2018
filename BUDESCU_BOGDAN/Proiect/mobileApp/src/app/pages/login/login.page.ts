@@ -52,6 +52,7 @@ export class LoginPage implements OnInit {
     this.authService.login(signInData).subscribe((data: any) => {
       localStorage.setItem("token", data.token);
       this.authService.userData = data.userData;
+      this.authService.isLogged = true;
       setTimeout(() => {
         loading.dismiss();
         this.presentToast(data.message);

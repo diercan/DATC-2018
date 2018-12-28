@@ -5,11 +5,13 @@ import { TabsPage } from './tabs.page';
 import { HomePage } from '../home/home.page';
 import { AboutPage } from '../about/about.page';
 import { ContactPage } from '../contact/contact.page';
+import { AuthGuardService } from 'src/app/services/auth/auth-guard.service';
 
 const routes: Routes = [
   {
     path: 'tabs',
     component: TabsPage,
+    canActivate: [AuthGuardService],
     children: [
       {
         path: '',
@@ -19,17 +21,17 @@ const routes: Routes = [
       {
         path: 'home',
         outlet: 'home',
-        component: HomePage
+        component: HomePage,
       },
       {
         path: 'about',
         outlet: 'about',
-        component: AboutPage
+        component: AboutPage,
       },
       {
         path: 'contact',
         outlet: 'contact',
-        component: ContactPage
+        component: ContactPage,
       }
     ]
   },
@@ -44,4 +46,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }
