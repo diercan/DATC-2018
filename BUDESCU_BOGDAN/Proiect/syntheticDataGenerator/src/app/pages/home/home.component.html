@@ -1,6 +1,13 @@
-<p>
-  home works!
-</p>
-<pre>
-  {{dataReceived | json}}
-</pre>
+<h1 align="center" >
+  Status view
+</h1>
+  <table border="1" style="text-align:center" align="center" >
+    <tr>
+      <th>ParkId</th>
+      <th>Status</th>
+    </tr>
+    <tr *ngFor="let data of datas">
+      <td>{{data.ParkId }}</td>
+      <td>{{data.Status}}</td>
+    </tr>
+  </table>
