@@ -148,7 +148,7 @@ namespace BackGroundWorker
                 cb.Password = "Proiect@2018";
                 cb.InitialCatalog = "Irrigation";
 
-                var sqlConnection = new SqlConnection(cb.ConnectionString);   
+                var sqlConnection = new SqlConnection(cb.ConnectionString);
 
 
                 while (true)
@@ -174,49 +174,48 @@ namespace BackGroundWorker
                         };
                         channel.BasicConsume(queue: "irrigation",
                                              autoAck: true,
-                                             consumer: consumer);                       
+                                             consumer: consumer);
                     }
                     #endregion
 
 
-                    if (!message.Equals("0"))
+                    //if (!message.Equals("0"))
+                    //{
+                    sqlConnection.Open();
+                    minVal = GetMinVal(sqlConnection, "E");
+                    maxVal = GetMaxVal(sqlConnection, "E");
+
+                    Console.WriteLine("\n \n MinVal = " + minVal + "\n maxVal = " + maxVal + "\n Humidity = " + message);
+
+                    message = message.Replace("\r\n", string.Empty);
+
+                    int humidity = Convert.ToInt32(message);
+                    if (humidity < minVal)
                     {
-                        sqlConnection.Open();
-                        minVal = GetMinVal(sqlConnection, "E");
-                        maxVal = GetMaxVal(sqlConnection, "E");
-
-                        Console.WriteLine("\n \n MinVal = " + minVal + "\n maxVal = " + maxVal + "\n Humidity = " + message);
-
-                        message = message.Replace("\r\n", string.Empty);
-
-                        int humidity = Convert.ToInt32(message);
-                        if (humidity < minVal)
-                        {
-                            pumpStatus = "ON";
-                        }
-                        else if ((Convert.ToInt16(message)) > maxVal)
-                        {
-                            pumpStatus = "OFF";
-                        }
-
-                        Console.WriteLine("\n \n pump status = " + pumpStatus);
-
-
-                        Submit_Tsql_NonQuery(sqlConnection, " Update-RealTimeValues",
-                          UpdateHumidity("E", message, pumpStatus), //message),
-                           "@csharpParmDepartmentName", "Accounting");
-                        sqlConnection.Close();
-
-                        //System.Threading.Thread.Sleep(5000);
-
-                        // FetchRandomValues();
-
-                        // CheckHumidityTresholds();
-
-                        //RefreshHeatMap()
+                        pumpStatus = "ON";
                     }
-                }
+                    else if ((Convert.ToInt16(message)) > maxVal)
+                    {
+                        pumpStatus = "OFF";
+                    }
 
+                    Console.WriteLine("\n \n pump status = " + pumpStatus);
+
+
+                    Submit_Tsql_NonQuery(sqlConnection, " Update-RealTimeValues",
+                      UpdateHumidity("E", message, pumpStatus), //message),
+                       "@csharpParmDepartmentName", "Accounting");
+                    sqlConnection.Close();
+
+                    //System.Threading.Thread.Sleep(5000);
+
+                    // FetchRandomValues();
+
+                    // CheckHumidityTresholds();
+
+                    //RefreshHeatMap()
+                    //
+                }
             }
             catch (SqlException e)
             {

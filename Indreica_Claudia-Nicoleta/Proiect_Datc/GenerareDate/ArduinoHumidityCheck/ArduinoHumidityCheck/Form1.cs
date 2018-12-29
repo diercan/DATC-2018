@@ -56,13 +56,13 @@ namespace ArduinoHumidityCheck
             string msgToSend = "";
             msgToSend = serialPort1.ReadExisting().ToString();
             //msgToSend = "humidity=" + msgToSend;
-            /*if (richTextBox1.InvokeRequired)
+            if (richTextBox1.InvokeRequired)
             {
                 richTextBox1.Invoke((MethodInvoker)delegate ()
                 {
                     richTextBox1.Text = richTextBox1.Text + "\t" + msgToSend;
                 });
-            }*/
+            }
             var factory = new ConnectionFactory() { Uri = new Uri("amqp://psntfxdl:a7gzROOSUJ62v3AmFtmlH1E0VFej5j5Q@flamingo.rmq.cloudamqp.com/psntfxdl") };
 
             using (var connection = factory.CreateConnection())

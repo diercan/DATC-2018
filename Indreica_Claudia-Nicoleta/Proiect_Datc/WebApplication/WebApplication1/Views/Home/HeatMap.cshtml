@@ -53,7 +53,7 @@
 <div id="map"></div>
 <script>
     var map;
-    function initMap() {
+   /* function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             zoom: 2,
             center: { lat: -33.865427, lng: 151.196123 },
@@ -68,6 +68,83 @@
         script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
         document.getElementsByTagName('head')[0].appendChild(script);
 
+    }*/
+
+    // This example requires the Drawing library. Include the libraries=drawing
+    // parameter when you first load the API. For example:
+    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=drawing">
+
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 45.7460173, lng: 21.2273234 },
+            zoom: 19.25
+        });
+
+        /*var drawingManager = new google.maps.drawing.DrawingManager({
+            drawingMode: google.maps.drawing.OverlayType.MARKER,
+            drawingControl: true,
+            drawingControlOptions: {
+                position: google.maps.ControlPosition.TOP_CENTER,
+                drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
+            },
+            markerOptions: { icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png' },
+            circleOptions: {
+                fillColor: '#ffff00',
+                fillOpacity: 1,
+                strokeWeight: 5,
+                clickable: false,
+                editable: true,
+                zIndex: 1
+            }
+        });
+        drawingManager.setMap(map);
+        // To show:
+        drawingManager.setOptions({drawingControl: true});*/
+        var parcel_ACoords = [
+            { lat: 45.746109, lng: 21.226294 },
+            { lat: 45.746157, lng: 21.226815 },
+            { lat: 45.745784, lng: 21.226748 },
+            { lat: 45.745874, lng: 21.226405 },
+            { lat: 45.746109, lng: 21.226294 }
+        ];
+
+        var parcel_BCoords = [
+            { lat: 45.746157, lng: 21.22682 },
+            { lat: 45.746168, lng: 21.227146 },
+            { lat: 45.745761, lng: 21.227172 },
+            { lat: 45.745784, lng: 21.226754 },
+            { lat: 45.746157, lng: 21.22682 }
+        ];
+
+        /*var triangleCoords = [
+            { lat: 25.774, lng: -80.190 },
+            { lat: 8.466, lng: -66.118 },
+            { lat: 32.321, lng: -64.757 },
+            { lat: 25.774, lng: -80.190 }
+        ];*/
+
+        // Construct the polygon.
+        var Parcel_A = new google.maps.Polygon({
+            paths: parcel_ACoords, //triangleCoords,
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35
+        });
+
+        Parcel_A.setMap(map);
+
+        var Parcel_B= new google.maps.Polygon({
+            paths: parcel_BCoords, //triangleCoords,
+            strokeColor: '#d60270',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#cdb7b5',
+            fillOpacity: 0.3
+        });
+
+        Parcel_B.setMap(map);
     }
 
     function eqfeed_callback(results) {

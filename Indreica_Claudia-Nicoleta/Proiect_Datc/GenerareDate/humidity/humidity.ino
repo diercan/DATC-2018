@@ -13,5 +13,5 @@ void loop() {
   //analogWrite(3, result);
   int humidity = map(value, 1023, 0, 0, 100);
   Serial.println(humidity);
-  delay(5000);
+  delay(15000);
 }
