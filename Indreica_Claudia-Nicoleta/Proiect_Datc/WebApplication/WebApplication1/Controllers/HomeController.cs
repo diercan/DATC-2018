@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
+using System.Data.SqlClient;
+using RabbitMQ.Client;
 
 namespace WebApplication1.Controllers
 {
@@ -17,8 +19,9 @@ namespace WebApplication1.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-
+            
+            int level = database();
+            ViewData["Message"] = "Your application description page." + "\nLEVEL:"+level;
             return View();
         }
 
@@ -45,6 +48,33 @@ namespace WebApplication1.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public int database()
+        {
+            //public static SqlConnection sqlConnection;
+
+
+
+            var cb = new SqlConnectionStringBuilder();
+            cb.DataSource = "irrigation-datc.database.windows.net";
+            cb.UserID = "datc";
+            cb.Password = "Proiect@2018";
+            cb.InitialCatalog = "Irrigation";
+
+            var sqlConnection = new SqlConnection(cb.ConnectionString);
+
+            sqlConnection.Open();
+
+            var command = new SqlCommand(@"SELECT humidity FROM RealTimeValues WHERE parcelName='" + "B" + "';", sqlConnection);
+            SqlDataReader sdr = command.ExecuteReader();
+            int parcelLevel = 0;
+            if (sdr.Read())
+            {
+                parcelLevel = Convert.ToInt32(sdr[0].ToString());
+            }
+            sdr.Close();
+            return parcelLevel;
         }
     }
 }
