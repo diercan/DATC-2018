@@ -13,12 +13,11 @@ namespace IrrigationAPI.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class IrigationDBEntities : DbContext
+    public partial class IrigationDBEntities1 : DbContext
     {
-        public IrigationDBEntities()
-            : base("name=IrigationDBEntities")
+        public IrigationDBEntities1()
+            : base("name=IrigationDBEntities1")
         {
-            
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -26,8 +25,8 @@ namespace IrrigationAPI.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Senzori> Senzoris { get; set; }
         public virtual DbSet<Istoric> Istorics { get; set; }
+        public virtual DbSet<Senzori> Senzoris { get; set; }
         public virtual DbSet<Value> Values { get; set; }
     }
 }

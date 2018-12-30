@@ -12,18 +12,20 @@ namespace IrrigationAPI.Models
     using System;
     using System.Collections.Generic;
     
-   
     public partial class Senzori
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Senzori()
         {
+            this.Istorics = new HashSet<Istoric>();
             this.Values = new HashSet<Value>();
         }
     
         public int Id { get; set; }
         public string Locatie { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Istoric> Istorics { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Value> Values { get; set; }
     }

@@ -12,14 +12,13 @@ namespace IrrigationAPI.Models
     using System;
     using System.Collections.Generic;
     
-  
     public partial class Value
     {
         public int Id { get; set; }
+        public int Id_senzor { get; set; }
         public Nullable<double> Temperatura { get; set; }
         public Nullable<double> Umiditate { get; set; }
         public System.DateTime Timestemp { get; set; }
-        public int Id_value { get; set; }
         public string Pompa { get; set; }
     
         public virtual Senzori Senzori { get; set; }
