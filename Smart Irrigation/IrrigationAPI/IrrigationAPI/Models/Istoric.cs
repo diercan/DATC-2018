@@ -12,12 +12,18 @@ namespace IrrigationAPI.Models
     using System;
     using System.Collections.Generic;
     
-    [Serializable]
     public partial class Istoric
     {
+        public int Id { get; set; }
+        public int Id_senzor { get; set; }
         public System.DateTime Data { get; set; }
+        public Nullable<double> MaxTemperatura { get; set; }
+        public Nullable<double> MinTemperatura { get; set; }
         public Nullable<double> MedieTemperatura { get; set; }
+        public Nullable<double> MaxUmiditate { get; set; }
+        public Nullable<double> MinUmiditate { get; set; }
         public Nullable<double> MedieUmiditate { get; set; }
-        public short Id_Istoric { get; set; }
+    
+        public virtual Senzori Senzori { get; set; }
     }
 }

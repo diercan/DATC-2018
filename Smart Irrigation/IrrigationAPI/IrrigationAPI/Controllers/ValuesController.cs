@@ -17,16 +17,17 @@ namespace IrrigationAPI.Controllers
 {
     public class ValuesController : ApiController
     {
-        const string ServiceBusConnectionString = "Endpoint=sb://irrigation.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=EM1mmXaWccHBM5+iSnBhUbaTT2e1pfd97Th/d9ODKzE=";
+        const string ServiceBusConnectionString = "Endpoint=sb://datc2018.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=DIU6B8J2ZwMcqDj1nb6gm3fbiCPIWx8LdxW73PUaOHY=";
         const string QueueName = "queue";
         static IQueueClient queueClient;
         
         public List<Value> Get()
         {
-            using (IrigationDBEntities context = new IrigationDBEntities())
+            using (IrigationDBEntities1 context = new IrigationDBEntities1())
             {
-                var list = context.Values.Include(val => val.Senzori).ToList();
-                list.ForEach(x => x.Senzori = null);
+               
+               var list = context.Values.Include(val => val.Senzori).ToList();
+               list.ForEach(x => x.Senzori = null);
                return list;
             }
         }
@@ -34,10 +35,11 @@ namespace IrrigationAPI.Controllers
         // GET api/values/05-Dec-18 7:33:57 PM
         public Value Get(DateTime timestemp)
         {
-            using (IrigationDBEntities context = new IrigationDBEntities())
+            using (IrigationDBEntities1 context = new IrigationDBEntities1())
             {
-                Value value = context.Values.FirstOrDefault(v => v.Timestemp== timestemp);
-                return value;
+                Value value = context.Values.FirstOrDefault(v => v.Timestemp.Equals(timestemp));
+                value.Senzori = null;
+                return value;  
             }
         }
 
@@ -45,20 +47,22 @@ namespace IrrigationAPI.Controllers
     
         public Value Get(int id)
         {
-            using (IrigationDBEntities context = new IrigationDBEntities())
+            using (IrigationDBEntities1 context = new IrigationDBEntities1())
             {
-                Value value = context.Values.Include(sel => sel.Senzori).Where(val => val.Id_value == id).First();
+                Value value = context.Values.Include(val => val.Senzori).Where(s=>s.Id_senzor==id).ToList().LastOrDefault();               
+                //Value value = context.Values.Include(sel => sel.Senzori).Where(val => val.Id == id).First();
+                value.Senzori = null;
                 return value;
             }
         }
+
 
         // POST api/values
         public Value Post(Value value)
         {
             queueClient = new QueueClient(ServiceBusConnectionString, QueueName);
-            using (IrigationDBEntities context = new IrigationDBEntities())
-            {
-                                             
+            using (IrigationDBEntities1 context = new IrigationDBEntities1())
+            {                       
                 value.Timestemp = DateTime.Now;
 
                 string json = JsonConvert.SerializeObject(value);
@@ -66,21 +70,45 @@ namespace IrrigationAPI.Controllers
                 queueClient.SendAsync(new Message(messageBody));
 
 
-                //value.Senzori = context.Senzoris.Include(sen => sen.Values).Where(sen => sen.Id == value.Id).First();
-               // context.Values.Add(value);
-               // context.SaveChanges();
+                //value.Senzori = context.Senzoris.Include(sen => sen.Values).Include(sen => sen.Istorics).Where(sen => sen.Id == value.Id_senzor).First();
+                //context.Values.Add(value);
+                //context.SaveChanges();
             }
             return value;
         }
 
         // PUT api/values/5
-        public void Put(int id, Double temp,Double umiditate)
+        public void Put(int id,string pompa)
         {
-            using (IrigationDBEntities context = new IrigationDBEntities())
+            using (IrigationDBEntities1 context = new IrigationDBEntities1())
             {
                 Value value = context.Values.FirstOrDefault(v => v.Id == id);
-                value.Temperatura = temp;
-                value.Umiditate = umiditate;
+                value.Timestemp = DateTime.Now;
+                // value.Temperatura = temp;
+                //value.Umiditate = umiditate;
+                value.Pompa = pompa;
+                context.SaveChanges();
+            }
+        }
+        public void Put(Value value)
+        {
+            using (IrigationDBEntities1 context = new IrigationDBEntities1())
+            {
+                Value value2 = context.Values.FirstOrDefault(v => v.Id == value.Id);
+                value2.Timestemp = DateTime.Now;
+                if (value.Temperatura != null)
+                {
+                    value2.Temperatura = value.Temperatura;
+                }
+                if (value.Umiditate != null)
+                {
+                    value2.Umiditate = value.Umiditate;
+                }
+                if (value.Pompa != null)
+                {
+                    value2.Pompa = value.Pompa;
+                }
+                
                 context.SaveChanges();
             }
         }
@@ -88,7 +116,7 @@ namespace IrrigationAPI.Controllers
         // DELETE api/values/5
         public void Delete(int id)
         {
-            using (IrigationDBEntities context = new IrigationDBEntities())
+            using (IrigationDBEntities1 context = new IrigationDBEntities1())
             {
                 Value value = context.Values.FirstOrDefault(v => v.Id == id);
                 context.Values.Remove(value);
@@ -99,7 +127,7 @@ namespace IrrigationAPI.Controllers
         // DELETE api/values/05-Dec-18 7:33:57 PM
         public void Delete(DateTime timestemp)
         {
-            using (IrigationDBEntities context = new IrigationDBEntities())
+            using (IrigationDBEntities1 context = new IrigationDBEntities1())
             {
                 Value value = context.Values.FirstOrDefault(v => v.Timestemp == timestemp);
                 context.Values.Remove(value);
