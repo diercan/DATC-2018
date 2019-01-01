@@ -7,7 +7,7 @@ import { MessageService } from 'src/app/services/message/message.service';
 import { Subscription, Observable } from 'rxjs';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ReservePage } from '../reserve/reserve.page';
-
+import * as momentz from 'moment-timezone';
 declare var google: any;
 
 @Component({
@@ -23,13 +23,14 @@ export class HomePage {
   public infoWindow: google.maps.InfoWindow;
 
   idReqGetParkingSpaces: any;
-  readonly DELAY_REQ = 100000;
+  readonly DELAY_REQ = 2000;
   private _msgSubscription: Subscription;
   private _watch: Observable<any>;
   directionsService: google.maps.DirectionsService;
   directionsDisplay: google.maps.DirectionsRenderer;
   public originLocation;
   public destinationLocation;
+  public reservations: any;
   constructor(
     private _platform: Platform,
     private _cfg: ConfService,
@@ -53,7 +54,9 @@ export class HomePage {
         }
       })
 
-      this.idReqGetParkingSpaces = setInterval(() => this.getParkingSpaces(), this.DELAY_REQ);
+      this.idReqGetParkingSpaces = setInterval(() => {
+        this.getParkingSpaces();
+      }, this.DELAY_REQ);
       this._messageService.getMessage().subscribe((message) => {
         if (message.action == "change_tab") {
           message.content != "home" ? clearInterval(this.idReqGetParkingSpaces) : this.idReqGetParkingSpaces = setInterval(() => this.getParkingSpaces(), this.DELAY_REQ);
@@ -70,6 +73,8 @@ export class HomePage {
   public getParkingSpaces() {
     return new Promise((resolve, reject) => {
       this._httpService.getParkingSpaces().subscribe((result: any) => {
+        this.parkingSpaces = [];
+
         for (let i = 0; i < result.data.length; i++) {
           const element = result.data[i];
           this.parkingSpaces.push({
@@ -78,9 +83,26 @@ export class HomePage {
             lat: element.Lat,
             type: element.Status
           })
+          try {
+
+            this.parkingSpaceMarkers[i].setIcon({
+              path: "M0,0 1.25,0 1.25,2.5 0,2.5",
+              rotation: 331,
+              scale: 8.5,
+              fillColor: element.Status == 0 ? 'red' : 'green',
+              fillOpacity: 0.7,
+              strokeWeight: 0.4
+            })
+          }
+          catch (err) { }
         }
         resolve(true)
       });
+
+      this._httpService.getReservations().subscribe((data) => {
+        this.reservations = data;
+        console.log(this.reservations)
+      })
     })
   }
 
@@ -204,6 +226,23 @@ export class HomePage {
 
   private _infoWindowContent(indexMarker): string {
 
+    let reservations = this.reservations.filter(res => res.ParkId == (indexMarker + 1));
+    console.log(reservations)
+    let sReservations = reservations.length == 0 ? `` : `<tr >
+                            <th style='border:1px solid #c0c0c0;'>Name</th>
+                            <th style='border:1px solid #c0c0c0;'>Start</th>
+                            <th style='border:1px solid #c0c0c0;'>End</th>
+                            <th style='border:1px solid #c0c0c0;'>Photo</th>
+                         </tr>`;
+
+    reservations.forEach(element => {
+      sReservations += `<tr >
+                          <td style='border:1px solid #c0c0c0;'> ${element.FirstName}</td>  
+                          <td style='border:1px solid #c0c0c0;'> ${momentz(element.StartDate).format("YY-MM-DD h:mm")}</td>
+                          <td style='border:1px solid #c0c0c0;'> ${momentz(element.EndDate).format("YY-MM-DD h:mm")}</td>
+                          <td style='border:1px solid #c0c0c0;'><img style='width:45px;height:auto;margin:2px' src=${ this._cfg.BASE_URL + "/" + element.Photo}></td>
+                        </tr>`;
+    });
     let _btn = `<button style='background-color: #3880ff; 
                     border: none;
                     color: white;
@@ -233,6 +272,7 @@ export class HomePage {
               <p style='font-size: 14px;'> Status : <b>${this.parkingSpaces[indexMarker].type == 0 ? 'ocupat' : 'liber'}</b></p>
               <div style='margin-top:4px'> ${this.parkingSpaces[indexMarker].type == 0 ? "" : _btn} </div>
               <div style='margin-top:4px'> ${_btnRoute} </div>
+              <table style='margin-top:4px;text-align:center;font-weight:600;' > ${sReservations} </table>
             </div>`;
   }
 

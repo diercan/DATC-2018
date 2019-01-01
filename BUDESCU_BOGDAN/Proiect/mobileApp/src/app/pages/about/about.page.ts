@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class AboutPage {
   private _msgSubscription: Subscription;
-
+  public myReservations: any;
   constructor(
     private _messageService: MessageService,
     private _httpService: HttpService
@@ -33,6 +33,7 @@ export class AboutPage {
   getReservationsById() {
     this._httpService.getReservationsById().subscribe((data) => {
       console.log(data)
+      this.myReservations = data;
     })
   }
 }

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ConfService {
 
-  public readonly BASE_URL: string = "http://192.168.16.106:8081/api";
+  public readonly BASE_URL: string = "http://192.168.85.1:8081/api";
   //"http://185.104.180.158:8081/api";
   public readonly PARKING_SPACES: any[] =
     [

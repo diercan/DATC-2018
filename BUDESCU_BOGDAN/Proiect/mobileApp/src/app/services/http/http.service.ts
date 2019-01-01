@@ -73,7 +73,7 @@ export class HttpService {
   }
 
   public getReservations() {
-    
+
     let options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ export class HttpService {
   }
 
   public getReservationsById() {
-    
+
     let options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
