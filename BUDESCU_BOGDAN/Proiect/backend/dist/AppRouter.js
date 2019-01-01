@@ -35,6 +35,9 @@ class AppRouter {
             this.worker.postMessage({ data: input });
             cb(null);
         });
+        // setInterval(() => {
+        //     this.worker.postMessage({ data: null });
+        // }, 5000)
     }
     initWorker() {
         let cb = (err, result) => {
@@ -58,6 +61,7 @@ class AppRouter {
             this.router.post("/api/users/register", yield this.register.bind(this));
             this.router.post("/api/users/login", yield this.login.bind(this));
             this.router.get("/api/park/getParkingSpaces", yield this.getParkingSpaces.bind(this));
+            this.router.post("/api/park/addStatus", yield this.addStatus.bind(this));
             this.router.use(yield this._isAuthorized.bind(this));
             this.router.post("/api/users/checkToken", yield this.checkToken.bind(this));
             this.router.post("/api/users/logout", yield this.logout.bind(this));
@@ -66,6 +70,7 @@ class AppRouter {
             this.router.post("/api/reservations/create", yield this.createReservation.bind(this));
             this.router.get("/api/reservations/getReservations", yield this.getReservations.bind(this));
             this.router.get("/api/reservations/getReservationsByUserId", yield this.getReservationsByUserId.bind(this));
+            this.router.post("/api/reservations/create", yield this.createReservation.bind(this));
         });
     }
     _isAuthorized(req, res, next) {
@@ -203,7 +208,6 @@ class AppRouter {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("getParkingSpaces()");
             let result = yield this.parkingDb.getParkingSpaces();
-            this.queue.push(result[0]);
             if (result) {
                 res.status(200);
                 res.json({ data: result });
@@ -257,6 +261,17 @@ class AppRouter {
             let userData = yield this.userDb.findUserByToken(req.headers.authorization);
             let results = yield this.reservationDb.getReservationsByUserId(userData[0].Id);
             res.json(results);
+        });
+    }
+    addStatus(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("addStatus()");
+            this.queue.push("status");
+            for (let i = 0; i < req.body.length; i++) {
+                const element = req.body[i];
+                yield this.parkingDb.addParkStatus(element.ParkId, element.Status);
+            }
+            res.json(true);
         });
     }
 }

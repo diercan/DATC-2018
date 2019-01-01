@@ -40,6 +40,10 @@ export class AppRouter {
             this.worker.postMessage({ data: input });
             cb(null);
         });
+
+        // setInterval(() => {
+        //     this.worker.postMessage({ data: null });
+        // }, 5000)
     }
 
     private initWorker() {
@@ -64,6 +68,7 @@ export class AppRouter {
         this.router.post("/api/users/register", await this.register.bind(this));
         this.router.post("/api/users/login", await this.login.bind(this));
         this.router.get("/api/park/getParkingSpaces", await this.getParkingSpaces.bind(this));
+        this.router.post("/api/park/addStatus", await this.addStatus.bind(this));
         this.router.use(await this._isAuthorized.bind(this));
         this.router.post("/api/users/checkToken", await this.checkToken.bind(this));
         this.router.post("/api/users/logout", await this.logout.bind(this));
@@ -72,6 +77,7 @@ export class AppRouter {
         this.router.post("/api/reservations/create", await this.createReservation.bind(this));
         this.router.get("/api/reservations/getReservations", await this.getReservations.bind(this));
         this.router.get("/api/reservations/getReservationsByUserId", await this.getReservationsByUserId.bind(this));
+        this.router.post("/api/reservations/create", await this.createReservation.bind(this));
     }
 
     private async _isAuthorized(req: Request, res: Response, next: NextFunction) {
@@ -211,7 +217,6 @@ export class AppRouter {
 
         console.log("getParkingSpaces()")
         let result: any = await this.parkingDb.getParkingSpaces();
-        this.queue.push(result[0]);
         if (result) {
             res.status(200);
             res.json({ data: result });
@@ -252,17 +257,28 @@ export class AppRouter {
     }
 
     public async getReservations(req: Request, res: Response, next: NextFunction) {
-       
+
         console.log("getReservations()")
         let results = await this.reservationDb.getReservations();
         res.json(results)
     }
 
     public async getReservationsByUserId(req: Request, res: Response, next: NextFunction) {
-       
+
         console.log("getReservationsByUserId()")
         let userData: any = await this.userDb.findUserByToken(req.headers.authorization);
         let results = await this.reservationDb.getReservationsByUserId(userData[0].Id);
         res.json(results)
+    }
+
+    public async addStatus(req: Request, res: Response, next: NextFunction) {
+
+        console.log("addStatus()")
+        this.queue.push("status");
+        for (let i = 0; i < req.body.length; i++) {
+            const element = req.body[i];
+            await this.parkingDb.addParkStatus(element.ParkId, element.Status);
+        }
+        res.json(true);
     }
 }
