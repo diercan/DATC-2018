@@ -1,6 +1,11 @@
-﻿using Microsoft.Azure.WebJobs;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Azure.WebJobs;
 
-namespace WebJob1
+namespace WebJob2
 {
     // To learn more about Microsoft Azure WebJobs SDK, please see https://go.microsoft.com/fwlink/?LinkID=320976
     class Program
@@ -16,10 +21,10 @@ namespace WebJob1
                 config.UseDevelopmentSettings();
             }
 
-            config.UseServiceBus();
             var host = new JobHost(config);
-            // The following code ensures that the WebJob will be running continuously
-            host.RunAndBlock();
+            // The following code will invoke a function called ManualTrigger and 
+            // pass in data (value in this case) to the function
+            host.Call(typeof(Functions).GetMethod("ManualTrigger"), new { value = 20 });
         }
     }
 }
