@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
-using Newtonsoft;
 using Newtonsoft.Json;
-using System.Data.SqlClient;
 using IrrigationAPI.Models;
 using System.Data.Entity;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Azure.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
+using System;
 //using System.Data.Entity.Infrastructure;
 //using System.Net.Http;
 //using System.Web.Http;
@@ -24,106 +23,111 @@ namespace WebJob1
         // on an Azure Queue called queue.
         public static void ProcessQueueMessage([ServiceBusTrigger("queue")] BrokeredMessage message, TextWriter log)
         {
-           // byte [] msg=message.to
-           /// var json = Encoding.Unicode.GetString(message);
-           Value value = JsonConvert.DeserializeObject<Value>(message.ToString());
-            double previousTemp = 0;
-            double tempTreshold=10;
-            double umidityTreshhold = 35;  
+            try {
+                //byte[] msg = message.Body;
+                //string json = Encoding.UTF8.GetString(msg);
+                //var json = Encoding.Unicode.GetString(message);
+                //Value value = message.GetBody<Value>();
 
-            using (IrrigationAPI.Models.IrigationDBEntities1 context = new IrigationDBEntities1())
-            {
-                Value previousvalue =  context.Values.Include(val => val.Senzori).Where(s => s.Id_senzor == value.Id_senzor).ToList().LastOrDefault();
-                previousTemp = (double) previousvalue.Temperatura;
+                // Value value = JsonConvert.DeserializeObject<Value>(json);
+                // Console.WriteLine($"Received message: SequenceNumber:{message.SystemProperties.SequenceNumber} Body:{Encoding.UTF8.GetString(message.Body)}");
 
-                //  Verify data
-                if (value.Umiditate > 100)
-                {
-                    value.Umiditate = 100;
-                }
-                else if (value.Umiditate < 0)
-                {
-                    value.Umiditate = 0;
-                }
+                Value value = new Value();
+                value.Temperatura = (double)message.Properties["Temperatura"];
+                value.Umiditate = (double)message.Properties["Umiditate"];
+                value.Pompa = message.Properties["Pompa"].ToString();
+                value.Id_senzor = (int)message.Properties["Id_senzor"];
+                message.Complete();
 
-                //Start pompa if umiditate is below umidityTreshhold
-                if (value.Umiditate < umidityTreshhold)
-                {
-                    value.Pompa = "On";
-                }
+                double previousTemp = 0;
+                double tempTreshold = 10;
+                double tempMax = 50;
+                double tempMin = -50;
+                double umidityTreshhold = 35;
+                double umidityUpLimit = 80;
 
-                if (previousTemp == 0)
+                using (IrrigationAPI.Models.IrigationDBEntities1 context = new IrigationDBEntities1())
                 {
-                    previousTemp = (double) value.Temperatura;
-                }
-                else
-                {
-                    if (value.Temperatura < previousTemp - tempTreshold)
+                    Value previousvalue = context.Values.Include(val => val.Senzori).Where(s => s.Id_senzor == value.Id_senzor).ToList().LastOrDefault();
+                    if (previousvalue != null)
                     {
-                        value.Temperatura = previousTemp - tempTreshold;
-                        previousTemp = (double)value.Temperatura;
-                    }
-                    else if (value.Temperatura > previousTemp + tempTreshold)
-                    {
-                        value.Temperatura = previousTemp + tempTreshold;
-                        previousTemp = (double)value.Temperatura;
+                       
+                        previousTemp = (double)previousvalue.Temperatura;
                     }
                     else
                     {
-                        previousTemp = (double)value.Temperatura;
+                        previousTemp = 0;
+
                     }
+
+                    //  Verify data
+                    if (value.Umiditate > 100)
+                    {
+                        value.Umiditate = 100;
+                    }
+                    else if (value.Umiditate < 0)
+                    {
+                        value.Umiditate = 0;
+                    }
+
+                    //Start pompa if umiditate is below umidityTreshhold
+                    if (value.Umiditate < umidityTreshhold)
+                    {
+                        value.Pompa = "On";
+                    }
+                    else if(value.Umiditate > umidityUpLimit)
+                    {
+                        value.Pompa = "Off";
+                    }
+
+                    if (previousTemp == 0)
+                    {
+                        if (value.Temperatura > tempMax)
+                        {
+                            previousTemp = tempMax;
+                        }
+                        else if (value.Temperatura < tempMin)
+                        {
+                            previousTemp = tempMin;
+                        }
+                        else
+                        {
+                            previousTemp = (double)value.Temperatura;
+                        }
+                    }
+                    
+                        if (value.Temperatura < previousTemp - tempTreshold)
+                        {
+                            value.Temperatura = previousTemp - tempTreshold;
+                            previousTemp = (double)value.Temperatura;
+                        }
+                        else if (value.Temperatura > previousTemp + tempTreshold)
+                        {
+                            value.Temperatura = previousTemp + tempTreshold;
+                            previousTemp = (double)value.Temperatura;
+                        }
+                        else
+                        {
+                            previousTemp = (double)value.Temperatura;
+                        }
+                   
+
+                    //value.Senzori = context.Senzoris.Include(sen => sen.Values).Where(sen => sen.Id == value.Id_senzor).First();
+                    value.Timestemp = DateTime.Now;
+                    context.Values.Add(value);
+                    context.SaveChanges();
+                   // Thread.Sleep(5000);
+
                 }
 
-                //value.Senzori = context.Senzoris.Include(sen => sen.Values).Where(sen => sen.Id == value.Id_senzor).First();
-               context.Values.Add(value);
-               context.SaveChanges();
             }
 
-
-            //using (SqlConnection conn1 = new SqlConnection("Server=tcp:datc2018.database.windows.net,1433;Initial Catalog=IrigationDB;Persist Security Info=False;User ID=HPH-root;Password=DATC-2018;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
-            //{
-            //    //Verify data
-            //    if (value.Umiditate > 100)
-            //    {
-            //        value.Umiditate = 100;
-            //    }
-            //    else if (value.Umiditate < 0)
-            //    {
-            //        value.Umiditate = 0;
-            //    }
-
-            //    if (previousTemp == 0)
-            //    {
-            //        previousTemp = (double)value.Temperatura;
-            //    }
-            //    else
-            //    {
-            //        if (value.Temperatura < previousTemp - treshold)
-            //        {
-            //            value.Temperatura = previousTemp - treshold;
-            //            previousTemp = (double)value.Temperatura;
-            //        }
-            //        else if (value.Temperatura > previousTemp + treshold)
-            //        {
-            //            value.Temperatura = previousTemp + treshold;
-            //            previousTemp = (double)value.Temperatura;
-            //        }
-            //        else
-            //        {
-            //            previousTemp = (double)value.Temperatura;
-            //        }
-            //    }
-
-            //    SqlCommand cmd = new System.Data.SqlClient.SqlCommand();
-            //    cmd.CommandType = System.Data.CommandType.Text;
-            //    cmd.CommandText = "INSERT Values (Temperatura, Umiditate,Pompa) VALUES (" + value.Temperatura + "," + value.Umiditate + ",'" + value.Pompa + "')";
-            //    cmd.Connection = conn1;
-
-            //    conn1.Open();
-            //    cmd.ExecuteNonQuery();
-            //    conn1.Close();
-            //}
-            //log.WriteLine(message);
+            catch (Exception e)
+            {
+               // Thread.Sleep(5000);
+                //message.RenewLock();
+            }
         }
+        
     }
 }

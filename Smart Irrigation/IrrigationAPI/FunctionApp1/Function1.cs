@@ -6,15 +6,15 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FunctionApp
+namespace FunctionApp1
 {
     public static class Function1
     {
         [FunctionName("Function1")]
-        //                                 every day at 00:00:00
         public static void Run([TimerTrigger("0 0 0 * * *")]TimerInfo myTimer, TraceWriter log)
         {
-            double tempmin, tempmax, tempavg, umidmin, umidmax, umidavg;           
+
+            double tempmin, tempmax, tempavg, umidmin, umidmax, umidavg;
             int count;
             using (IrigationDBEntities1 context = new IrigationDBEntities1())
             {
@@ -23,19 +23,19 @@ namespace FunctionApp
                 foreach (Senzori s in senzoriList)
                 {
                     tempmin = 100;
-                    tempmax =-100;
+                    tempmax = -100;
                     tempavg = 0;
                     umidmin = 100;
                     umidmax = 0;
                     umidavg = 0;
-                    List<Value> valuesList = context.Values.Where(v => v.Id_senzor == s.Id).ToList();
-                    //list.ForEach(x => x.Senzori = null);
+                    List<Value> valuesList = context.Values.Include(val=>val.Senzori).Where(v => v.Id_senzor == s.Id).ToList();
+                    valuesList.ForEach(x => x.Senzori = null);
                     count = valuesList.Count;
-                    foreach(Value v in valuesList)
+                    foreach (Value v in valuesList)
                     {
                         tempavg += (double)v.Temperatura;
                         umidavg += (double)v.Umiditate;
-                        if(v.Umiditate >umidmax)
+                        if (v.Umiditate > umidmax)
                         {
                             umidmax = (double)v.Umiditate;
                         }
@@ -65,11 +65,11 @@ namespace FunctionApp
                     istoric.MaxUmiditate = umidmax;
                     istoric.MaxUmiditate = umidmax;
                     istoric.MedieUmiditate = umidavg;
-                    istoric.Data = DateTime.Now;
+                    istoric.Data = DateTime.Now.Date;
                     context.Istorics.Add(istoric);
                     context.SaveChanges();
                 }
-            }                                          
+            }
             //log.Info($"C# Timer trigger function executed at: {DateTime.Now}");
         }
     }
