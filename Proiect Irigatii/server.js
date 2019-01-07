@@ -1,59 +1,18 @@
 
 const express = require('express');
 const app = express();
-//var tediousExpress = require('express4-tedious');
+
+//sockets
 var io = require('socket.io');
 var http = require('http');
 
+//database
+var Connection = require('tedious').Connection;
+var Request = require('tedious').Request;
+
 var server =http.createServer(app).listen(3000);
-//Server listens on the port 200
+console.log("Server is listening on port 3000");
 io = io.listen(server); 
-/*initializing the websockets communication , server instance has to be sent as the argument */
- 
-io.sockets.on("connection",function(socket){
-    /*Associating the callback function to be executed when client visits the page and 
-      websocket connection is made */
-      
-      var message_to_client = {
-      	
-        'place' : 'Botanic',
-		'umitidate' : 20,
-		'temperatura' : 29
-      
-  }
-
-      socket.send(JSON.stringify(message_to_client)); 
-      /*sending data to the client , this triggers a message event at the client side */
-	    console.log('Socket.io Connection with the client established');
-	    socket.on("message",function(data){
-        /*This event is triggered at the server side when client sends the data using socket.send() method */
-        data = JSON.parse(data);
- 
-        console.log(data);
-        /*Printing the data */
-        var ack_to_client = {
-        data:"Server Received the message"
-      }
-      socket.send(JSON.stringify(ack_to_client));
-        /*Sending the Acknowledgement back to the client , this will trigger "message" event on the clients side*/
-    });
- 
-
- 
-});
-
-
-
-
-// var connection = { "server"  : "<<server name or ip>>",
-// 	"userName": "<<user name>>",
-// 	"password": "<<password>>",
-// 	"options": { "encrypt": true, "database": "<<database name>>" } };
-
-// app.use(function (req, res, next) {
-//     req.sql = tediousExpress(connection);
-//     next();
-// });
 
 
 app.use(express.static('public'));
@@ -73,8 +32,100 @@ app.post('/', function (req, res) {
 
 
 
- // router.post('/valoriSenzori', function(req, res, next) {
- //      var obj = {};
- //            console.log('body: ' + JSON.stringify(req.body));
- //            res.send(req.body);
- //    });
+// Create connection to database
+var config = 
+{
+    userName: 'echipa404', 
+    password: 'ste5woUnces', 
+    server: 'sistemirigatii.database.windows.net', 
+    options:
+    {
+        database: 'SistemIrigatiiDb', 
+        encrypt: true
+    }
+}
+
+
+var connection = new Connection(config);
+
+// Attempt to connect and execute queries if connection goes through
+connection.on('connect', function(err)
+    {
+        if (err)
+        {
+            console.log(err)
+        }
+        else
+        {
+          //while(1){
+             //queryDatabase();
+            // sleep(5000)
+           //}
+        }
+    }
+);
+
+io.sockets.on("connection", function()
+{  
+  console.log("Client is conected!");
+  setInterval(function(){
+    queryDatabase();
+}, 10000);
+     
+});
+
+
+// io.sockets.on("querydb", function()
+// {  
+//   console.log("Client query");
+//     queryDatabase();
+     
+// })
+
+function queryDatabase()
+{
+    console.log('Reading rows from the Table...');
+   
+  
+    // Read all rows from table
+    var request = new Request(
+        "select locatie as locatie, umiditate as umiditate, starepompa as starepompa from sistemirigatii ",
+        function(err, rowCount, rows)
+        {
+            console.log(rowCount + ' row(s) returned');
+        }
+    );
+
+    request.on('row', function(columns) {
+
+            var locatie=columns[0].value;
+            var umiditate= columns[1].value;
+            var starepompa= columns[2].value;
+            
+            var results= locatie+ "," + umiditate + "," +starepompa;
+            results=JSON.stringify(results);
+            //results=JSON.parse(results);
+            console.log(results);
+            io.sockets.emit("message",{locatie:locatie, umiditate:umiditate,starepompa:starepompa});
+
+        });
+       connection.execSql(request);
+       
+     }
+
+
+
+
+
+
+
+
+
+ function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
