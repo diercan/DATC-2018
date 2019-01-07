@@ -23,7 +23,7 @@ export class ParcariPage {
     this.presentAlert();
     this.getParcari();
 
-    Observable.interval(5000).subscribe(x => {
+    Observable.interval(3000).subscribe(x => {
       var route = "api/get/parcari";
       this.requests.get(route).subscribe(data => {
         this.parcari = data;
