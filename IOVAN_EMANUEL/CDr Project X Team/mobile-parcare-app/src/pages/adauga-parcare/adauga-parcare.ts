@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage, ModalController } from 'ionic-angular';
+import { NavController, IonicPage, ModalController, ToastController } from 'ionic-angular';
 import { RequestsService } from '../../providers/requests.service';
 
 @IonicPage({
@@ -15,7 +15,8 @@ export class AdaugaParcarePage {
 
   constructor(public navCtrl: NavController,
               private modalCtrl: ModalController,
-              private requests: RequestsService) {
+              private requests: RequestsService,
+              private toastCtrl: ToastController) {
 
   }
   
@@ -29,6 +30,13 @@ export class AdaugaParcarePage {
       console.log('Eroare! S-a intamplat ceva la introducerea parcarii!');
     }, () => {
       this.isLoading = false;
+      let toast = this.toastCtrl.create({
+        message: 'Parcarea a fost adaugata cu succes!',
+        duration: 3000,
+        position: 'top'
+      });
+          
+      toast.present();
     })
   }
 

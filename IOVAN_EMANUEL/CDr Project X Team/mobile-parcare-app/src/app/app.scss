@@ -63,6 +63,25 @@
     }
 }
 
+.left-nav-user {
+    margin: 10px 0px 10px 17px;
+
+    span.left-nav-user-title {
+        font-size: 1.7rem;
+        margin-left: 10px;
+        font-weight: bold;
+    }
+
+    ion-icon.user-icon {
+        color: lightgrey;
+        font-size: 70px;
+    }
+}
+
+.align-center {
+    align-self: center;
+}
+
 .color-blue { color: #007bff; }
 .color-indigo { color: #6610f2; }
 .color-purple { color: #6f42c1; }

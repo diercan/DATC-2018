@@ -13,7 +13,21 @@
       </ion-toolbar>
     </ion-header>
   
-    <ion-content>      
+    <ion-content>
+      <ion-row class="left-nav-user">
+        <ion-col col-auto class="align-center" no-padding>
+          <ion-icon name="contact" class="user-icon"></ion-icon> 
+        </ion-col>
+        <ion-col col-auto class="align-center" no-padding>
+          <span class="left-nav-user-title">{{globals.userName}}</span>
+        </ion-col>
+      </ion-row>
+
+      <ion-list>
+        <button menuClose ion-item *ngFor="let p of tabPages" (click)="openPage(p.component)">
+          {{p.title}}
+        </button>
+      </ion-list>
     </ion-content>
   
     <ion-footer class="left-nav-footer">

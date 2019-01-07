@@ -1,5 +1,8 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon color="dark" name="menu"></ion-icon>
+    </button>
     <ion-title>
       Contact
     </ion-title>
@@ -11,7 +14,7 @@
   <ion-list no-margin>
     <ion-item no-padding>
       <ion-label floating>E-mailul dumneavoastra</ion-label>
-      <ion-input type="text" [(ngModel)]="email"></ion-input>
+      <ion-input type="text" [(ngModel)]="mail"></ion-input>
     </ion-item>
 
     <ion-item no-padding>

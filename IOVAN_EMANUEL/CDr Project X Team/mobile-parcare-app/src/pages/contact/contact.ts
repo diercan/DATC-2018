@@ -10,7 +10,8 @@ import { EmailComposer } from '@ionic-native/email-composer';
   templateUrl: 'contact.html'
 })
 export class ContactPage {
-
+  mesaj: String = '';
+  mail: String = '';
   constructor(public navCtrl: NavController,
               private emailComposer: EmailComposer) {
 
@@ -19,7 +20,9 @@ export class ContactPage {
   trimiteMail() {
     let email = {
       to: 'emiiovan@clinicdr.com',
-      subject: '[CDr X Project]'
+      subject: '[CDr X Project]',
+      body: this.mesaj + "<br /> <br />Trimis de: " + this.mail,
+      isHtml: true
     };
   
     this.emailComposer.open(email);

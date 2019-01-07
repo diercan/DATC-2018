@@ -16,7 +16,6 @@
         <ion-col col-6 *ngFor="let loc of parcare.StareLocuriArray; let i = index">
             <ion-row>
                 <ion-col (click)="updateParcare(parcare.IdParcare, i, loc)" text-center class="loc-parcare min-height">
-                    {{i}}
                     <ion-icon class="masina-in-parcare" *ngIf="loc == 1" name="car"></ion-icon>
                 </ion-col>
                 
@@ -31,7 +30,6 @@
         <ion-col col-12 *ngFor="let loc of parcare.StareLocuriArray; let i = index">
             <ion-row>
                 <ion-col text-center class="loc-parcare min-height">
-                    {{i}}
                     <ion-icon class="masina-in-parcare" *ngIf="loc == 1" name="car"></ion-icon>
                 </ion-col>
                 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, IonicPage, AlertController, ModalController } from 'ionic-angular';
 import { RequestsService } from '../../providers/requests.service';
 import { GlobalsService } from '../../providers/globals.service';
+import { Observable } from 'rxjs/Rx';
 
 @IonicPage({
   priority: 'off'
@@ -21,6 +22,13 @@ export class ParcariPage {
               private modalCtrl: ModalController) {
     this.presentAlert();
     this.getParcari();
+
+    Observable.interval(5000).subscribe(x => {
+      var route = "api/get/parcari";
+      this.requests.get(route).subscribe(data => {
+        this.parcari = data;
+      });
+    });
   }
 
   getParcari() {
@@ -35,6 +43,7 @@ export class ParcariPage {
       this.isLoading = false;
     })
   }
+  
 
   getInitials(name: string) {
     let arr = name.split(' ');
