@@ -1,0 +1,11 @@
+C:\Users\plesd\Desktop\irigatii\backgroundworker\bin\Debug\netcoreapp2.2\backgroundworker.deps.json
+C:\Users\plesd\Desktop\irigatii\backgroundworker\bin\Debug\netcoreapp2.2\backgroundworker.runtimeconfig.json
+C:\Users\plesd\Desktop\irigatii\backgroundworker\bin\Debug\netcoreapp2.2\backgroundworker.runtimeconfig.dev.json
+C:\Users\plesd\Desktop\irigatii\backgroundworker\bin\Debug\netcoreapp2.2\backgroundworker.dll
+C:\Users\plesd\Desktop\irigatii\backgroundworker\bin\Debug\netcoreapp2.2\backgroundworker.pdb
+C:\Users\plesd\Desktop\irigatii\backgroundworker\obj\Debug\netcoreapp2.2\backgroundworker.csprojAssemblyReference.cache
+C:\Users\plesd\Desktop\irigatii\backgroundworker\obj\Debug\netcoreapp2.2\backgroundworker.csproj.CoreCompileInputs.cache
+C:\Users\plesd\Desktop\irigatii\backgroundworker\obj\Debug\netcoreapp2.2\backgroundworker.AssemblyInfoInputs.cache
+C:\Users\plesd\Desktop\irigatii\backgroundworker\obj\Debug\netcoreapp2.2\backgroundworker.AssemblyInfo.cs
+C:\Users\plesd\Desktop\irigatii\backgroundworker\obj\Debug\netcoreapp2.2\backgroundworker.dll
+C:\Users\plesd\Desktop\irigatii\backgroundworker\obj\Debug\netcoreapp2.2\backgroundworker.pdb
