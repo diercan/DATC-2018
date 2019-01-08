@@ -1,0 +1,37 @@
+from time import sleep
+from Bluetin_Echo import Echo
+import datetime
+from firebase import firebase
+
+# Define pin constants
+TRIGGER_PIN_1 = 16
+ECHO_PIN_1 = 12
+TRIGGER_PIN_2 = 26
+ECHO_PIN_2 = 19
+
+#connect to firebase
+firebase = firebase.FirebaseApplication('https://datc-4c223.firebaseio.com/', None)
+
+# Initialise two sensors.
+echo = [Echo(TRIGGER_PIN_1, ECHO_PIN_1)
+        , Echo(TRIGGER_PIN_2, ECHO_PIN_2)]
+    
+id = 0
+while 1:
+        sleep(5)
+
+        distanta1 = echo[0].read('cm', 3)
+        distanta2 = echo[0].read('cm', 3) 
+
+	#get date
+	date = datetime.datetime.now()
+
+	#send data to firebase
+	id=id+1
+	firebase.put('Date1/senzor1/' + str(id)+'/',"time",date)
+        firebase.put('Date1/senzor1/' + str(id)+'/',"dist",distanta1)
+	
+	firebase.put('Date1/senzor2/' + str(id)+'/',"time",date)
+        firebase.put('Date1/senzor2/' + str(id)+'/',"dist",distanta2)
+	
+	firebase.put('Counter/node/',"cnt",id)
