@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Firebase trial</title>
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    </head>
+
+    <body>
+        <h1>Insert random no. in Firebase - </h1>
+    </body>
+    
+<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCRiFBmgEfwKJXP7adeqd_VTpb0CPmHFyQ",
+    authDomain: "fir-withjs-37415.firebaseapp.com",
+    databaseURL: "https://fir-withjs-37415.firebaseio.com",
+    projectId: "fir-withjs-37415",
+    storageBucket: "",
+    messagingSenderId: "140805408316"
+  };
+  firebase.initializeApp(config);
+</script>
+    
+<script>
+    function myFunction() {
+        
+        var i = 0;
+        while(i < 12){
+            var random = Math.floor(Math.random() * 2);
+            var random1 = Math.floor(Math.random() * 2);
+            var random2 = Math.floor(Math.random() * 2);
+            var random3 = Math.floor(Math.random() * 2);
+            console.log(random);
+            console.log(random1);
+            console.log(random2);
+            console.log(random3);
+           // alert(random);
+            // the reference to my database
+            var firebaseRef = firebase.database().ref(); 
+            firebaseRef.child("isOccupied").set(random);
+            var firebaseRef = firebase.database().ref(); 
+            firebaseRef.child("isOccupied1").set(random1);
+            var firebaseRef = firebase.database().ref(); 
+            firebaseRef.child("isOccupied2").set(random2);
+            var firebaseRef = firebase.database().ref(); 
+            firebaseRef.child("isOccupied3").set(random3);
+            i++;
+        }
+}
+    myFunction();
+    </script>
+</html>
+© 2019 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Press h to open a hovercard with more details.
