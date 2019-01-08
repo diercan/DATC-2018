@@ -59,7 +59,7 @@ citiredate4 = analogRead(pinsenzor4);
 citiredate5 = analogRead(pinsenzor5);
 
 procentumiditate_senzor0 = map(citiredate0, 1023,0,0,100);
-if (procentumiditate_senzor0 < 10)
+if (procentumiditate_senzor0 < 50)
 {
   setColor0(0,255);
   
@@ -71,7 +71,7 @@ else
  }
 
 procentumiditate_senzor1 = map(citiredate1, 1023,0,0,100);
-if (procentumiditate_senzor1 < 10)
+if (procentumiditate_senzor1 < 50)
 {
   setColor1(0,255);
   
@@ -84,7 +84,7 @@ else
  }
  
 procentumiditate_senzor2 = map(citiredate2, 1023,0,0,100);
-if (procentumiditate_senzor2 < 10)
+if (procentumiditate_senzor2 < 50)
 {
   setColor2(0,255);
   
@@ -97,7 +97,7 @@ else
  }
  
 procentumiditate_senzor3 = map(citiredate3, 1023,0,0,100);
-if (procentumiditate_senzor3 < 10)
+if (procentumiditate_senzor3 < 50)
 {
   setColor3(0,255);
 
@@ -110,7 +110,7 @@ else
  }
  
 procentumiditate_senzor4 = map(citiredate4, 1023,0,0,100);
-if (procentumiditate_senzor4 < 10)
+if (procentumiditate_senzor4 < 50)
 {
   setColor4(0,255);
  
@@ -122,7 +122,7 @@ else
  }
  
 procentumiditate_senzor5 = map(citiredate5, 1023,0,0,100);
-if (procentumiditate_senzor5 < 10)
+if (procentumiditate_senzor5 < 50)
 {
   setColor5(0,255);
 
@@ -135,32 +135,32 @@ else
  }
  
 
-//Serial.print("Humidity Senzor 0: ");
+Serial.print("Botanic: ");
 Serial.print(procentumiditate_senzor0);
 Serial.print("%,");
 
 Serial.println(" ");
-//Serial.print("Humidity Senzor 1: ");
+Serial.print("Copiilor: ");
 Serial.print(procentumiditate_senzor1);
 Serial.print("%,");
 
 Serial.println(" ");
-//Serial.print("Humidity Senzor 2: ");
+Serial.print("Zoo: ");
 Serial.print(procentumiditate_senzor2);
 Serial.print("%,");
 
 Serial.println(" ");
-//Serial.print("Humidity Senzor 3: ");
+Serial.print("Stadion: ");
 Serial.print(procentumiditate_senzor3);
 Serial.print("%,");
 
 Serial.println(" ");
-//Serial.print("Humidity Senzor 4: ");
+Serial.print("Civic: ");
 Serial.print(procentumiditate_senzor4);
 Serial.print("%,");
 
 Serial.println(" ");
-//Serial.print("Humidity Senzor 5: ");
+Serial.print("Maria: ");
 Serial.print(procentumiditate_senzor5);
 Serial.print("%,");
 
