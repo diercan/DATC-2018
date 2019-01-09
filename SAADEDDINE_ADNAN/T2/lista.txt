@@ -1,0 +1,3 @@
+https://docs.microsoft.com/ro-ro/azure/cosmos-db/graph-introduction
+https://whatis.techtarget.com/definition/graph-database
+https://orientdb.com/graph-database/
