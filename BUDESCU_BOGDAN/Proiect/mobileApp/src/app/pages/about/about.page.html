@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Istoric</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-grid style="text-align: center;">
+      <ion-row>
+        <ion-col size="2"><b>ParkId</b></ion-col>
+        <ion-col size="5"><b>StartDate</b></ion-col>
+        <ion-col size="5"><b>EndDate</b></ion-col>
+      </ion-row>
+      <ion-row *ngFor="let reservation of myReservations">
+        <ion-col size="2">
+          {{reservation.ParkId}}
+        </ion-col>
+        <ion-col size="5">
+          {{reservation.StartDate | date:'medium'}}
+        </ion-col>
+        <ion-col size="5">
+          {{reservation.EndDate | date:'medium'}}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-content>

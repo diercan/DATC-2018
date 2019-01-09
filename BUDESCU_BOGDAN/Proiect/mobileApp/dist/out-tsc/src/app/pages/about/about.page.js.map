@@ -1,0 +1,1 @@
+{"version":3,"file":"about.page.js","sourceRoot":"","sources":["../../../../../../src/app/pages/about/about.page.ts"],"names":[],"mappings":";;;;;;AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,eAAe,CAAC;AAO1C;IAAA;IAAwB,CAAC;IAAZ,SAAS;QALrB,SAAS,CAAC;YACT,QAAQ,EAAE,WAAW;YACrB,WAAW,EAAE,iBAAiB;YAC9B,SAAS,EAAE,CAAC,iBAAiB,CAAC;SAC/B,CAAC;OACW,SAAS,CAAG;IAAD,gBAAC;CAAA,AAAzB,IAAyB;SAAZ,SAAS"}
