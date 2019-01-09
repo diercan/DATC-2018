@@ -1,0 +1,3 @@
+https://www.maxcdn.com/one/visual-glossary/cors/
+https://spring.io/understanding/CORS
+https://www.keycdn.com/support/cors

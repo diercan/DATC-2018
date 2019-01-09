@@ -1,0 +1,3 @@
+https://docs.microsoft.com/en-us/azure/architecture/best-practices/background-jobs
+https://aspnetboilerplate.com/Pages/Documents/Background-Jobs-And-Workers
+https://www.c-sharpcorner.com/article/run-background-task-using-hostingenvironment-queuebackgroundworkitem-net-framew/
