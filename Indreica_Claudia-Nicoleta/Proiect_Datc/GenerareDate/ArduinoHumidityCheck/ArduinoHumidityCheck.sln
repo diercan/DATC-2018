@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2041
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArduinoHumidityCheck", "ArduinoHumidityCheck\ArduinoHumidityCheck.csproj", "{63F8A074-CD29-4B91-AF14-8290F5D51361}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63F8A074-CD29-4B91-AF14-8290F5D51361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63F8A074-CD29-4B91-AF14-8290F5D51361}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63F8A074-CD29-4B91-AF14-8290F5D51361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63F8A074-CD29-4B91-AF14-8290F5D51361}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E71CC22F-E08B-442D-8B28-3CE38E626D22}
+	EndGlobalSection
+EndGlobal
