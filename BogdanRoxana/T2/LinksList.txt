@@ -1,0 +1,3 @@
+https://www.oreilly.com/ideas/five-security-concerns-when-using-docker
+https://www.mongodb.com/containers-and-orchestration-explained
+https://devopedia.org/container-orchestration

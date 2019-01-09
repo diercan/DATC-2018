@@ -1,0 +1,68 @@
+#include <Wire.h> 
+
+
+int citiredate0;
+int citiredate1;
+int citiredate2;
+int citiredate3;
+int citiredate4;
+int citiredate5;
+int procentumiditate_senzor0;
+int procentumiditate_senzor1;
+int procentumiditate_senzor2;
+int procentumiditate_senzor3;
+int procentumiditate_senzor4;
+int procentumiditate_senzor5;
+#define pinsenzor0 A0
+#define pinsenzor1 A1
+#define pinsenzor2 A2
+#define pinsenzor3 A3
+#define pinsenzor4 A4
+#define pinsenzor5 A5
+
+void setup()
+{
+
+Serial.begin(9600);
+}
+
+void loop()
+{
+citiredate0 = analogRead(pinsenzor0);
+citiredate1 = analogRead(pinsenzor1);
+citiredate2 = analogRead(pinsenzor2);
+citiredate3 = analogRead(pinsenzor3);
+citiredate4 = analogRead(pinsenzor4);
+citiredate5 = analogRead(pinsenzor5);
+
+procentumiditate_senzor0 = map(citiredate0, 1023,0,0,100);
+procentumiditate_senzor1 = map(citiredate1, 1023,0,0,100);
+procentumiditate_senzor2 = map(citiredate2, 1023,0,0,100);
+procentumiditate_senzor3 = map(citiredate3, 1023,0,0,100);
+procentumiditate_senzor4 = map(citiredate4, 1023,0,0,100);
+procentumiditate_senzor5 = map(citiredate5, 1023,0,0,100);
+
+Serial.println("Humidity Senzor 0: ");
+Serial.println(procentumiditate_senzor0);
+Serial.println("%");
+delay(2000);
+Serial.println("Humidity Senzor 1: ");
+Serial.println(procentumiditate_senzor1);
+Serial.println("%");
+Serial.println("Humidity Senzor 2: ");
+Serial.println(procentumiditate_senzor2);
+Serial.println("%");
+delay(2000);
+Serial.println("Humidity Senzor 3: ");
+Serial.println(procentumiditate_senzor3);
+Serial.println("%");
+Serial.println("Humidity Senzor 4: ");
+Serial.println(procentumiditate_senzor4);
+Serial.println("%");
+delay(2000);
+Serial.println("Humidity Senzor 5: ");
+Serial.println(procentumiditate_senzor5);
+Serial.println("%");
+
+delay(5000);  
+}
