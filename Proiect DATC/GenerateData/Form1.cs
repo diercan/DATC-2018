@@ -72,7 +72,7 @@ namespace GenerateData
             map.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.ViewCenter;
             timer1.Start();
             string connetionString;
-            connetionString = @"Data Source=smartparkingupt.database.windows.net;Initial Catalog=smartParking;User ID=andrasrazvan;Password=Dv22670133180783";
+            connetionString = @"Data Source=smartparkingupt.database.windows.net;Initial Catalog=smartParking;User ID=;Password=";
             cnn = new SqlConnection(connetionString);
             cnn.Open();
             MessageBox.Show("Connection Open  !");
