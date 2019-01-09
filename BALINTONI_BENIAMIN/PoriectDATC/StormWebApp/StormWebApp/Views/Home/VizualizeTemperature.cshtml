@@ -1,0 +1,248 @@
+﻿
+@model IEnumerable<StormWebApp.Models.Date>
+@{
+    ViewBag.Title = "Vizualize Humidity";
+    Layout = null;
+}
+
+<html>
+<head>
+    <title>Vizualizare Harta</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="~/Content/CssFiles/IndexCSS.css" />
+
+    <script type="text/javascript">
+        var dataheatRed = [];
+        var dataheatYellow = [];
+        var dataheatGreen = [];
+        var dataheatBlue = [];
+        var dataheatPurple = [];
+        var dataheatOrange = [];
+        var dataheatDarkRed = [];
+
+
+        function initMap() {
+
+            document.getElementById('map').innerText = "";
+        //    $('#map').load(window.location.href + ' #map');
+
+            var jItem = @Html.Raw(Json.Encode(Model));
+            var parcBotanic = new google.maps.LatLng(45.76046, 21.225);
+
+            var options = {
+                zoom: 18,
+                center: parcBotanic
+            }
+            // New map
+            var map = new google.maps.Map(document.getElementById('map'), options);
+
+
+            for (var i = 0; i < jItem.length; i++) {
+                addMarker(jItem[i]);
+                var point = new google.maps.LatLng(
+                    parseFloat(jItem[i].Latitude),
+                    parseFloat(jItem[i].Longitude)
+                );
+                if (parseFloat(jItem[i].Temperature) < -10)
+                {
+                    dataheatPurple.push(point);
+                }
+                else
+                {
+                    if (parseFloat(jItem[i].Temperature) >= -10 && parseFloat(jItem[i].Temperature) < 5)
+                    {
+                        dataheatBlue.push(point);
+                    }
+                    else
+                    {
+                        if (parseFloat(jItem[i].Temperature) >= 5 && parseFloat(jItem[i].Temperature) < 10) {
+                            dataheatGreen.push(point);
+                        }
+                        else
+                        {
+                            if (parseFloat(jItem[i].Temperature) >= 10 && parseFloat(jItem[i].Temperature) < 20) {
+                                dataheatYellow.push(point);
+                            }
+                            else
+                            {
+                                if (parseFloat(jItem[i].Temperature) >= 20 && parseFloat(jItem[i].Temperature) < 29) {
+                                    dataheatOrange.push(point);
+                                }
+                                else
+                                {
+                                    if (parseFloat(jItem[i].Temperature) >= 29 && parseFloat(jItem[i].Temperature) < 35) {
+                                        dataheatRed.push(point);
+                                    }
+                                    else
+                                    {
+                                        if (parseFloat(jItem[i].Temperature) >= 35) {
+                                            dataheatDarkRed.push(point);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            // Add Marker Function
+            function addMarker(props) {
+                var dt = Number(props.Data.substring(6,props.Data.length-2))
+                var newContent = document.createElement('div');
+                var div = document.createElement('div');
+                div.innerText = "Data: " + new Date(dt) +"\nTemperature: " + props.Temperature.toString() + " Humidity: " + props.Humidity.toString() + " \nNeed Irigation: " + props.NeedIrigation.toString();
+                newContent.appendChild(div);
+
+                var marker = "";
+                if (props.NeedIrigation != "YES" && props.NeedIrigation != "NO") // means is broken
+                {
+                    marker = new google.maps.Marker({
+                        position: { lat: parseFloat(props.Latitude), lng: parseFloat(props.Longitude) },
+                        map: map,
+                        icon: 'https://1.bp.blogspot.com/-bQk3EPcnSOA/WfXegGihGbI/AAAAAAAAvbc/2Txlb0G82jsk4_yW2Ill20viD12jRMU4ACLcBGAs/s1600/x-button.png' // X
+                        //  icon: 'https://permies.com/templates/default/images/20x20_orange_asterisk.gif'
+                        //  icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png'
+                    });
+                }
+                else 
+                {
+                        marker = new google.maps.Marker({
+                            position: { lat: parseFloat(props.Latitude), lng: parseFloat(props.Longitude) },
+                            map: map,
+                            icon: 'https://resources.enjin.com/1465083538/themes/v2/image/vote/Like/9.png' // OK
+                            // icon: 'https://1.bp.blogspot.com/-bQk3EPcnSOA/WfXegGihGbI/AAAAAAAAvbc/2Txlb0G82jsk4_yW2Ill20viD12jRMU4ACLcBGAs/s1600/x-button.png' // X
+                            //  icon: 'https://permies.com/templates/default/images/20x20_orange_asterisk.gif'
+                            //  icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png'
+                          //  icon: 'https://secure.images.akamai.opta.net/football/team/badges_20/6.png' // IRIGĂ
+                        });
+                    
+                }
+
+
+                var infoWindow = new google.maps.InfoWindow({
+                    content: newContent
+                });
+                marker.addListener('click', function () {
+                    infoWindow.open(map, marker);
+                });
+            }
+            // AICIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+            var yellow = [
+                'rgba(255, 255, 0, 0)',
+                'rgba(255, 255, 0, 1)'
+            ];
+
+            var red = [
+                'rgba(255, 102, 102, 0)',
+                'rgba(255, 102, 102, 1)'
+            ];
+
+            var DarkRed = [
+                'rgba(179, 0, 0, 0)',
+                'rgba(179, 0, 0, 1)'
+            ];
+
+            var green = [
+                'rgba(0, 255, 0, 0)',
+                'rgba(0, 255, 0, 1)'
+            ];
+
+            var blue = [
+                'rgba(0, 0, 255, 0)',
+                'rgba(0, 0, 255, 1)'
+            ];
+
+            var purple = [
+                'rgba(255, 102, 204, 0)',
+                'rgba(255, 102, 204, 1)'
+            ];
+
+            var orange = [
+                'rgba(255, 153, 102, 0)',
+                'rgba(255, 153, 102, 1)'
+            ];
+
+            var redHeatmap = new google.maps.visualization.HeatmapLayer({
+
+                data: dataheatRed,
+                map: map,
+                radius: 50
+
+            });
+
+            var DarkRedHeatmap = new google.maps.visualization.HeatmapLayer({
+
+                data: dataheatDarkRed,
+                map: map,
+                radius: 50
+
+            });
+
+            var yellowHeatmap = new google.maps.visualization.HeatmapLayer({
+
+                data: dataheatYellow,
+                map: map,
+                radius: 50
+
+            });
+            var greenHeatmap = new google.maps.visualization.HeatmapLayer({
+
+                data: dataheatGreen,
+                map: map,
+                radius: 50
+
+            });
+
+            var blueHeatmap = new google.maps.visualization.HeatmapLayer({
+
+                data: dataheatBlue,
+                map: map,
+                radius: 50
+
+            });
+
+            var purpleHeatmap = new google.maps.visualization.HeatmapLayer({
+
+                data: dataheatPurple,
+                map: map,
+                radius: 50
+
+            });
+
+            var orangeHeatmap = new google.maps.visualization.HeatmapLayer({
+
+                data: dataheatOrange,
+                map: map,
+                radius: 50
+
+            });
+
+            
+
+            redHeatmap.set('gradient', redHeatmap.get('gradient') ? null : red);
+            DarkRedHeatmap.set('gradient', DarkRedHeatmap.get('gradient') ? null : DarkRed);
+            yellowHeatmap.set('gradient', yellowHeatmap.get('gradient') ? null : yellow);
+            greenHeatmap.set('gradient', greenHeatmap.get('gradient') ? null : green);
+            blueHeatmap.set('gradient', blueHeatmap.get('gradient') ? null : blue);
+            purpleHeatmap.set('gradient', purpleHeatmap.get('gradient') ? null : purple);
+            orangeHeatmap.set('gradient', orangeHeatmap.get('gradient') ? null : orange);
+            // AICIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+        }
+
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeBrzsotmd8hGyxSeaFXiiOM_kfL2nnm4&callback=initMap&libraries=visualization" async defer></script>
+
+
+</head>
+
+<body bgcolor="DodgerBlue">
+    <div>
+        <h1 align="center">Vizualizare Temperatură</h1> <br />
+        <input type="button" value="Umiditate" id="Umid" name="Umid" onclick="location.href='@Url.Action("VizualizeHumidity")'" /><br />
+    </div>
+    <div id="map"></div>
+
+</body>
+</html>

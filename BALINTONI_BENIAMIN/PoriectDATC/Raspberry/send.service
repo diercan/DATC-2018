@@ -1,0 +1,9 @@
+[Unit]
+Description=My Conection
+
+[Service]
+ExecStart=/usr/bin/python /home/pi/WorkArea/DatabaseConection/databaseConection.py
+
+[Install]
+WantedBy=multi-user.target
+
