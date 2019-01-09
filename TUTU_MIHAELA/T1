@@ -1,0 +1,20 @@
+Hypertext Transfer Protocol
+Este un protocol de comunicare folosit pentru a accesa informatii pe internet, pastrate pe servere www (World Wide Web). HTTP presupune ca pe calculatorul destinatie ruleaza un program care intelege protocolul. 
+Modul de functionare:
+Daca se apeleaza un link sau o adresa web, atunci se cere calculatorului gazda sa afiseze o pagina web. In prima etapa, adresa este convertita de protocolul DNS intr-o adresa IP. Urmeaza transferal prin protocolul TCP pe portul standard 80 al serverului HTTP, ca raspuns la cererea HTTP-GET. In urma cererii HTTP-GET, serverul ofera un raspuns cu datele cerute. Daca dintr-un anumit motiv, informatiile nu pot fi transmise, atunci serverul va trimite un mesaj de eroare.
+Codurile de stare ale raspunsurilor HTTP sunt clasificate in 5 categorii:
+1xx – erori informationale – indica un raspuns provizoriu al server-ului si contine numai linia de status (raspuns).
+2xx – raspuns reusit – indica utilizatorului ca cererea a fost primita, inteleasa si acceptata cu success
+3xx – redirectari – indica faptul ca actiunile urmatoare vor trebui facute de browser pentru aputea fi indeplinita cererea.
+4xx – erori ale utilizatorilor – indica faptul ca utilizatorul  a gresit formularea cererii
+5xx – erori de server – indica faptul ca serverul e incapabil sa execute cererea.
+Mesajele HTTP pot fi citite de oameni (human readable).  Sunt de 2 tipuri – cerere si raspuns, fiecare avand un format diferit.
+Cererea (Request-ul) contine urmatoarele elemente: metoda HTTP (GET, POST) care defineste operatia dorita de client, calea catre resursa (http://), versiunea protocolului HTTP.
+Raspunsul (Response) contine elementele: versiunea de protocol HTTP, un cod al starii care indica faptul ca cererea a avut sau nu succes.   
+
+
+  
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+https://ro.wikipedia.org/wiki/Hypertext_Transfer_Protocol
+https://www.tutorialspoint.com/http/
+
