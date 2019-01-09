@@ -1,0 +1,16 @@
+{
+  "name": "emag-crawler",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "tsc && node ./dist/index.js"
+  },
+  "dependencies": {
+    "rxjs": "^6.3.3",
+    "@google-cloud/pubsub": "^0.22.2",
+    "@types/google-cloud__pubsub": "^0.18.1"
+  },
+  "devDependencies": {
+    "typescript": "^3.2.2"
+  }
+}

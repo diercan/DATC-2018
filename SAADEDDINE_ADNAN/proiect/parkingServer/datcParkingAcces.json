@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "datcparking",
+  "private_key_id": "6d0255a5d7b16106996b6e9e6e33068fd99901d4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCvmpCi1SrM+PMP\neH/Idpvt4SftoIi9HJYBpSgzHNLAYx9pO7iY4AA5ecxgkrQgOfNpQ4iaxtDyBiUb\n6EkdtSpyD2vBQXwpRV+M1/ZPiATKD+uSvJ4SGWokj1NShe6ZaJvbEuUIZvyJYmqr\n/nJ2N379eL538Pqxkwv5Bjx/QfBktLGVl2WlYjWT3A0HZcWIrZTLdMxYD4krFmkn\nD9Npad7k5IA5VcUnFT+qwVxiGjJnpUz0mFKcezAvdV6mLWZd9cNRzTswkzy8Owzs\nN3I+UIP3/4c9CqKOxNiJWLJCHx+JLWreAz++QpWL6fW7QSzMFU0btNg7Y3rtntip\ntTzJMNcnAgMBAAECggEAL6S6+0LksuoUYC0sVkI/+iFtiN5WWyDHXjjmGEAIuiPq\noM2QPwH/bZirJ8SF1HyEmxm0lXG9vPyH0vOJ6uJ9WqbucGeI/VWSIA90B4365qu9\nGXnNVVHJ55NvYuNtofes2Zpdw5LVj5zBHlsRyRszfCfnXXlnOwiPZggYH9rPEzMz\np1Rjjk5KzvLj81NHXsQncvDUnSSiWZ0hnEInotzhkCVAlTbCl/G+L1f8X+4RxIBZ\nNU+ZI1sv5gYYqturBFdmvHCvaky+vyGgtT3QG4wOt09A1Baonp1jVo4jDU7v/BQK\nDMf7vqVB19s5DewtUH/loLyjo7jtI7XPHlFn9eE5+QKBgQDpn/GR+KKjroMWUxd0\nZD4XX7/Qm8gdMHoojolQzmwsGEb6Ajrm0Q20rojtJqZXH5bQ6oGnfQDq7ZklZpvN\nQ7gR6fplYET+qF3EUA1QWDgRYIsOGG5mUpudb26dP5/F2IrHvkQcY45uc367YDsL\n/IW/pKBq366khevwqbbdGITzgwKBgQDAbA0hOTnRBmTUHmHx6tahNhZJjcHoXmuo\nbJaFhyEq34WSKItUTFIembYG6PL5uUanJmznAJrc0MiA7v8BcLSoUrX/01OnvegV\ngExSOcVQNJL6s0CsDju3wTDZ1H95yBLrrM/RLenVY3i0h5v8uJ9m/He/1e6dwa7r\nrxKgfRjojQKBgQCD2p2AgQ9pygh6BRNrwVe54XRkzEc5Ei8fzLJ7RMWQbXNBjxin\nRL2zh/4HupSO/2kjJ/ddDBQEg2y3yx2Lz/iHQ8LqjFbkUyn4riWVfvTF+fMBVZCZ\nd24UgNuxLEOEah6JdT0DuLyeYdjY8ArjTPY/ny5aozvx5xOulFp8lmYS+QKBgALK\nzpn30Z314MqvMi6ngLvQJBynIPQ1QoysHrcLUfDkU3Tef78WaG6nPlv1T2lORfcw\n+I2Vlam0oeQ1E6A6uXRj1t5Ce8lIWTDOrszWp8VVLfjTVxHoFvfApuvSSJNE0vl2\nhYF8kBMXoW3FNf9B0pZU/YvcF91ULSygWr3XcuAVAoGAKiKcSuJu23R4GQ7C+IFK\nyvtAotgKVNVQ2Q2GYCwpEBC4MCHv2YQRzti/cRr+ZuM6Eam56JBdMnS+QdI8DW/Q\nHCx2ISnSpKv6USVqosoLur0FQ0kc/N8ObZuG6RmZmLth9cUF8MTgUAhfnrHNekox\n1N9o2wgDwMi8clnfE8Cqghg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "datcproiect@datcparking.iam.gserviceaccount.com",
+  "client_id": "103859028623682208892",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/datcproiect%40datcparking.iam.gserviceaccount.com"
+}

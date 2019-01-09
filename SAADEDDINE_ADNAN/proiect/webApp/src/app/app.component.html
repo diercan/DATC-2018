@@ -1,0 +1,8 @@
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+  <agm-marker *ngFor="let spot of  spots"
+    [latitude]="spot.position.latitude"
+    [longitude]="spot.position.longitude"
+    [iconUrl]="spot.icon">
+  </agm-marker>
+</agm-map>
+
