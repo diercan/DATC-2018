@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon color="dark" name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Adauga Parcare
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h4>Introduceti datele parcarii</h4>
+  <ion-list no-margin>
+    <ion-item no-padding>
+      <ion-label floating>Locatie</ion-label>
+      <ion-input type="text" [(ngModel)]="model.LocatieParcare"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding>
+      <ion-label floating>Numar total de locuri</ion-label>
+      <ion-input type="number" [(ngModel)]="model.TotalLocuri"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div margin-bottom margin-top><a *ngIf="model.LocatieParcare?.length >= 3" (click)="harta(model.LocatieParcare)">Vizualizeaza locatia</a></div>
+  <div class="informational-note">Asigurati-va ca introduceti corect locatia parcarii pentru o localizare cat mai buna prin serviciile Google Maps!</div>
+  
+  <button margin-top ion-button block outline color="dark" (click)="adauga()">Adauga Parcare</button>
+</ion-content>

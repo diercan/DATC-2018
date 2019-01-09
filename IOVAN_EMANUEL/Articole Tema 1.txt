@@ -1,0 +1,3 @@
+https://www.codecademy.com/articles/what-is-crud
+https://frappe.io/docs/user/en/guides/integration/token_based_auth
+https://restful.io/an-introduction-to-api-s-cee90581ca1b

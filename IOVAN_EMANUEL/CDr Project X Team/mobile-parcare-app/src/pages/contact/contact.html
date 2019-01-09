@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon color="dark" name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Contact
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h4>Contactati-ne prin e-mail</h4>
+  <ion-list no-margin>
+    <ion-item no-padding>
+      <ion-label floating>E-mailul dumneavoastra</ion-label>
+      <ion-input type="text" [(ngModel)]="mail"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding>
+      <ion-label floating>Mesaj</ion-label>
+      <ion-textarea [(ngModel)]="mesaj"></ion-textarea>
+    </ion-item>
+  </ion-list>
+
+  <div margin-top class="informational-note">Dupa trimiterea e-mailului, veti fi contactat in cel mai scurt timp de catre un membru al echipei noastre. Va multumim!</div>
+  <button margin-top ion-button block outline color="dark" (click)="trimiteMail()">Trimite e-mail</button>
+</ion-content>

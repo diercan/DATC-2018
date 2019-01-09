@@ -1,0 +1,125 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+.left-nav-footer {
+
+    margin-bottom: 20px;
+    line-height: 14px;
+
+    .title-footer {
+        color: #b0b0b0 !important;
+        text-align: center !important;
+        font-weight: 400 !important;
+        font-size: 16px;
+    }
+
+    .copyright-footer {
+        color: #b0b0b0 !important;
+        text-align: center !important;
+        font-weight: 100 !important;
+        font-size: 9px;
+    }
+
+    &.footer.footer-md::before {
+        background-image: none !important;
+    }
+}
+
+.left-nav-header {
+    span.header-title {
+        font-size: 2rem;
+        margin-left: 5px;
+        font-weight: 500;
+        display: block;
+        margin-top: -4px;
+    }
+
+    span.header-subtitle {
+        margin-left: 5px;
+        font-size: 1rem;
+        display: block;
+    }
+
+    .left-nav-header-row {
+        margin-left: 10px;
+    }
+
+    .left-nav-header-row .cdr-car-logo {
+        font-size: 32px;
+    }
+}
+
+.left-nav-user {
+    margin: 10px 0px 10px 17px;
+
+    span.left-nav-user-title {
+        font-size: 1.7rem;
+        margin-left: 10px;
+        font-weight: bold;
+    }
+
+    ion-icon.user-icon {
+        color: lightgrey;
+        font-size: 70px;
+    }
+}
+
+.align-center {
+    align-self: center;
+}
+
+.color-blue { color: #007bff; }
+.color-indigo { color: #6610f2; }
+.color-purple { color: #6f42c1; }
+.color-pink { color: #e83e8c; }
+.color-red { color: #dc3545; }
+.color-orange { color: #fd7e14; }
+.color-yellow { color: #ffc107; }
+.color-green { color: #28a745; }
+.color-teal { color: #20c997; }
+.color-cyan { color: #17a2b8; }
+.color-white { color: #fff; }
+.color-gray { color: #6c757d; }
+.color-gray-dark { color: #343a40; }
+.color-primary { color: #007bff; }
+.color-secondary { color: #6c757d; }
+.color-success { color: #28a745; }
+.color-info { color: #17a2b8; }
+.color-warning { color: #ffc107; }
+.color-danger { color: #dc3545; }
+.color-light { color: #f8f9fa; }
+.color-dark { color: #343a40; }
+
+@media screen and (max-width: 767px) {
+    .section-responsive {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-y: hidden;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        border: 1px solid #ddd;
+    }
+}
+
+.section-responsive {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
+.informational-note {
+    font-size: 11px;
+    color: darkgrey;
+}

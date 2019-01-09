@@ -1,0 +1,3 @@
+https://www.bmc.com/blogs/single-tenant-vs-multi-tenant/
+https://www.ibm.com/developerworks/cloud/library/cl-multitenantcloud/index.html
+https://dev.to/jjude/what-is-a-multi-tenant-system-bpd
