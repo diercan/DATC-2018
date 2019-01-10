@@ -35,9 +35,6 @@ let checkPark = async () => {
     }
     console.timeEnd("elapsed")
 
-    // index++;
-    // console.log("WORKER ", index)
-    // // parentPort.postMessage({ index, val: "hello world from worker send val : " + index });
 }
 
 registerForEventListening();

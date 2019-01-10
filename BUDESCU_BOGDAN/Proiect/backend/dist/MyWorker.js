@@ -38,8 +38,5 @@ let checkPark = () => __awaiter(this, void 0, void 0, function* () {
         park[0].Status != 2 ? yield parkingDb.updateParkStatus(i, park[0].Status) : {};
     }
     console.timeEnd("elapsed");
-    // index++;
-    // console.log("WORKER ", index)
-    // // parentPort.postMessage({ index, val: "hello world from worker send val : " + index });
 });
 registerForEventListening();
