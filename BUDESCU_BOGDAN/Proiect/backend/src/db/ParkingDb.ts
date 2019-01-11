@@ -73,7 +73,7 @@ export class ParkingDb extends Db {
                     console.log("conn err, " + err.message);
                     resolve(false);
                 }
-                let sql = "select * from tempparkingspaces where ParkId = ? order by ModifyDate desc limit 1;";
+                let sql = "select * from TempParkingSpaces where ParkId = ? order by ModifyDate desc limit 1;";
                 connection.query(sql,
                     [
                         ParkId

@@ -8,7 +8,7 @@ class Db {
             host: 'localhost',
             user: 'root',
             password: '',
-            database: 'datc'
+            database: 'bogdan'
         };
         this.pool = mysql_1.createPool(this._connectionConfig);
     }

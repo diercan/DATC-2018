@@ -50,7 +50,7 @@ export class ReservationsDb extends Db {
                     console.log("conn err, " + err.message);
                     resolve(false);
                 }
-                let sql = "select Reservations.*, Users.Photo, Users.FirstName from Reservations, users where Reservations.UserId = Users.Id and EndDate > now();";
+                let sql = "select Reservations.*, Users.Photo, Users.FirstName from Reservations, Users where Reservations.UserId = Users.Id and EndDate > now();";
                 connection.query(sql,
                     (error: MysqlError, results: any, fields: FieldInfo[]) => {
                         connection.release();

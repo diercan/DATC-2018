@@ -1,9 +1,10 @@
 import { UserDb } from "./db/UserDb";
 import { ParkingDb } from "./db/ParkingDb";
 const { parentPort, workerData } = require('worker_threads');
+var fs = require('fs');
+const { execSync } = require('child_process');
 
 let interval;
-let index = -1;
 let userDb: UserDb = new UserDb();
 let parkingDb: ParkingDb = new ParkingDb();
 
@@ -15,6 +16,7 @@ let registerForEventListening = () => {
 
         console.log("@@@@@@@@@@@@@@@@@@@\nTask Received From Parent Thread: " + JSON.stringify(result) + "\n@@@@@@@@@@@@@@@@@@@");
         checkPark();
+        checkFile(__dirname + "/../uploaded_files");
     };
 
     // registering to events to receive messages from the main thread
@@ -24,7 +26,6 @@ let registerForEventListening = () => {
     });
 }
 
-// item of list will be multiplied with a factor as per index
 let checkPark = async () => {
 
     console.time("elapsed")
@@ -37,4 +38,24 @@ let checkPark = async () => {
 
 }
 
+let checkFile = async (dirname) => {
+    fs.readdir(dirname, (err, filenames) => {
+        if (err) {
+            console.log(err)
+            return;
+        }
+        filenames.forEach((filename) => {
+            if (!filename.includes("_tumb.") && filename.includes(".")) {
+                let tumbFile = dirname + "/" + filename.split(".")[0] + "_tumb." + filename.split(".")[1];
+                let originalFile = dirname + "/" + filename;
+                if (!fs.existsSync(tumbFile)) {
+                    let stdout = execSync('convert -size 60x ' + originalFile + " " + tumbFile);
+                    console.log(" stdout : " + stdout);
+                    console.log("####### image resized with success #######");
+                }
+            }
+        });
+        return;
+    });
+}
 registerForEventListening();

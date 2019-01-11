@@ -35,16 +35,16 @@ class AppRouter {
             this.worker.postMessage({ data: input });
             cb(null);
         });
-        // setInterval(() => {
-        //     this.worker.postMessage({ data: null });
-        // }, 5000)
+        setInterval(() => {
+            this.worker.postMessage({ data: null });
+        }, 5000);
     }
     initWorker() {
         let cb = (err, result) => {
             if (err) {
                 return console.error(err);
             }
-            console.log("Message From Worker: ", result.val);
+            //console.log("Message From Worker: ", result.val);
         };
         this.worker = new Worker(__dirname + '/MyWorker.js', { workerData: null });
         this.worker.on('message', (msg) => {
@@ -78,7 +78,6 @@ class AppRouter {
             let session = yield this.userDb.getSessionByToken(req.headers.authorization);
             if (session.length > 0) {
                 if (this.util.JWTVerify(session[0].AuthorizationToken, null)) {
-                    console.log("authorized");
                     next();
                 }
                 else {
@@ -128,7 +127,7 @@ class AppRouter {
     }
     login(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("login()");
+            //console.log("login()")
             let loginData = req.body;
             if (!loginData.Email && !loginData.Password) {
                 res.status(400);
@@ -161,7 +160,7 @@ class AppRouter {
     }
     checkToken(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("checkToken()");
+            //console.log("checkToken()")
             let result = yield this.userDb.findUserByToken(req.headers.authorization);
             if (result) {
                 res.status(200);
@@ -178,7 +177,7 @@ class AppRouter {
     }
     logout(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("logout()");
+            //console.log("logout()")
             let result = yield this.userDb.deleteSession(req.headers.authorization);
             if (result) {
                 res.status(200);
@@ -192,7 +191,7 @@ class AppRouter {
     }
     getData(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("getData()");
+            //console.log("getData()")
             let result = yield this.userDb.findUserByToken(req.headers.authorization);
             if (result) {
                 res.status(200);
@@ -206,7 +205,7 @@ class AppRouter {
     }
     getParkingSpaces(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("getParkingSpaces()");
+            //console.log("getParkingSpaces()")
             let result = yield this.parkingDb.getParkingSpaces();
             if (result) {
                 res.status(200);
@@ -220,7 +219,7 @@ class AppRouter {
     }
     uploadFile(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("uploadFile()");
+            //console.log("uploadFile()")
             let userData = yield this.userDb.findUserByToken(req.headers.authorization);
             let form = new formidable.IncomingForm();
             form.uploadDir = "./uploaded_files";
@@ -241,7 +240,7 @@ class AppRouter {
     }
     createReservation(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("getParkingSpaces()");
+            //console.log("getParkingSpaces()")
             let userData = yield this.userDb.findUserByToken(req.headers.authorization);
             let reservation = new Reservation_1.Reservation(req.body.ParkId, userData[0].Id, req.body.StartDate, req.body.EndDate);
             let result = yield this.reservationDb.createReservation(reservation);
@@ -250,14 +249,14 @@ class AppRouter {
     }
     getReservations(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("getReservations()");
+            //console.log("getReservations()")
             let results = yield this.reservationDb.getReservations();
             res.json(results);
         });
     }
     getReservationsByUserId(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("getReservationsByUserId()");
+            //console.log("getReservationsByUserId()")
             let userData = yield this.userDb.findUserByToken(req.headers.authorization);
             let results = yield this.reservationDb.getReservationsByUserId(userData[0].Id);
             res.json(results);
@@ -265,7 +264,7 @@ class AppRouter {
     }
     addStatus(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("addStatus()");
+            //console.log("addStatus()")
             this.queue.push("status");
             for (let i = 0; i < req.body.length; i++) {
                 const element = req.body[i];

@@ -41,15 +41,15 @@ export class AppRouter {
             cb(null);
         });
 
-        // setInterval(() => {
-        //     this.worker.postMessage({ data: null });
-        // }, 5000)
+        setInterval(() => {
+            this.worker.postMessage({ data: null });
+        }, 5000)
     }
 
     private initWorker() {
         let cb = (err, result) => {
             if (err) { return console.error(err); }
-            console.log("Message From Worker: ", result.val);
+            //console.log("Message From Worker: ", result.val);
         };
 
         this.worker = new Worker(__dirname + '/MyWorker.js', { workerData: null });
@@ -85,7 +85,6 @@ export class AppRouter {
         let session: any = await this.userDb.getSessionByToken(req.headers.authorization);
         if (session.length > 0) {
             if (this.util.JWTVerify(session[0].AuthorizationToken, null)) {
-                console.log("authorized")
                 next();
             } else {
                 res.status(401);
@@ -137,7 +136,7 @@ export class AppRouter {
 
     public async login(req: Request, res: Response, next: NextFunction) {
 
-        console.log("login()")
+        //console.log("login()")
         let loginData = <any>req.body as Login;
         if (!loginData.Email && !loginData.Password) {
             res.status(400);
@@ -173,7 +172,7 @@ export class AppRouter {
 
     public async checkToken(req: Request, res: Response, next: NextFunction) {
 
-        console.log("checkToken()")
+        //console.log("checkToken()")
         let result: any = await this.userDb.findUserByToken(req.headers.authorization);
         if (result) {
             res.status(200);
@@ -189,7 +188,7 @@ export class AppRouter {
 
     public async logout(req: Request, res: Response, next: NextFunction) {
 
-        console.log("logout()")
+        //console.log("logout()")
         let result: any = await this.userDb.deleteSession(req.headers.authorization);
         if (result) {
             res.status(200);
@@ -202,7 +201,7 @@ export class AppRouter {
 
     public async getData(req: Request, res: Response, next: NextFunction) {
 
-        console.log("getData()")
+        //console.log("getData()")
         let result: any = await this.userDb.findUserByToken(req.headers.authorization);
         if (result) {
             res.status(200);
@@ -215,7 +214,7 @@ export class AppRouter {
 
     public async getParkingSpaces(req: Request, res: Response, next: NextFunction) {
 
-        console.log("getParkingSpaces()")
+        //console.log("getParkingSpaces()")
         let result: any = await this.parkingDb.getParkingSpaces();
         if (result) {
             res.status(200);
@@ -228,7 +227,7 @@ export class AppRouter {
 
     public async uploadFile(req: Request, res: Response, next: NextFunction) {
 
-        console.log("uploadFile()")
+        //console.log("uploadFile()")
         let userData: any = await this.userDb.findUserByToken(req.headers.authorization);
         let form = new formidable.IncomingForm();
         form.uploadDir = "./uploaded_files"
@@ -249,7 +248,7 @@ export class AppRouter {
 
     public async createReservation(req: Request, res: Response, next: NextFunction) {
 
-        console.log("getParkingSpaces()")
+        //console.log("getParkingSpaces()")
         let userData: any = await this.userDb.findUserByToken(req.headers.authorization);
         let reservation: Reservation = new Reservation(req.body.ParkId, userData[0].Id, req.body.StartDate, req.body.EndDate);
         let result: any = await this.reservationDb.createReservation(reservation);
@@ -258,14 +257,14 @@ export class AppRouter {
 
     public async getReservations(req: Request, res: Response, next: NextFunction) {
 
-        console.log("getReservations()")
+        //console.log("getReservations()")
         let results = await this.reservationDb.getReservations();
         res.json(results)
     }
 
     public async getReservationsByUserId(req: Request, res: Response, next: NextFunction) {
 
-        console.log("getReservationsByUserId()")
+        //console.log("getReservationsByUserId()")
         let userData: any = await this.userDb.findUserByToken(req.headers.authorization);
         let results = await this.reservationDb.getReservationsByUserId(userData[0].Id);
         res.json(results)
@@ -273,7 +272,7 @@ export class AppRouter {
 
     public async addStatus(req: Request, res: Response, next: NextFunction) {
 
-        console.log("addStatus()")
+        //console.log("addStatus()")
         this.queue.push("status");
         for (let i = 0; i < req.body.length; i++) {
             const element = req.body[i];

@@ -7,7 +7,7 @@ export class Db {
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'datc'
+        database: 'bogdan'
     }
     public pool: Pool;
     constructor() {
