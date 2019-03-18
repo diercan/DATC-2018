@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html ng-app="demo">
+<head>
+  <meta charset="utf-8" />
+  <title>Parcari</title>
+  <script src="Scripts/angular.min.js"></script>
+  <script src="app/app.js"></script>
+  <script src="app/controllers/parcariController.js"></script>
+  <script>
+    // Initialize and add the map
+    function initMap() {
+      // The location of Uluru
+      uluru = { lat: -25.344, lng: 131.036 };
+      // The map, centered at Uluru
+      map = new google.maps.Map(document.getElementById('map'), { zoom: 4, center: uluru });
+      // The marker, positioned at Uluru
+      marker = new google.maps.Marker({ position: uluru, map: map });
+
+      geocoder = new google.maps.Geocoder();
+
+
+      // The map, centered at Uluru
+      mapAdaugare = new google.maps.Map(document.getElementById('mapAdaugare'), { zoom: 4, center: uluru });
+      // The marker, positioned at Uluru
+      markerAdaugare1 = new google.maps.Marker({ position: uluru, map: map, draggable:true});
+      markerAdaugare2 = new google.maps.Marker({ position: uluru, map: map, draggable: true});
+
+      
+    }
+
+
+  </script>
+  <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSzWAz13nhBBdVFx-Mtfeu9oHUBxztcvA&callback=initMap">
+  </script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+    /* Always set the map height explicitly to define the size of the div
+            * element that contains the map. */
+    #map {
+      height: 80%;
+      width:70%;
+
+    }
+
+    #mapAdaugare {
+      height: 50%;
+      width: 40%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    animate-hide {
+      -webkit-transition: all linear 0.5s;
+      transition: all linear 0.5s;
+      max-height: 1600px;
+      opacity: 1;
+      overflow: hidden;
+    }
+  </style>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+
+  <script>
+    app.controller('parcariController', function ($scope, $http) {
+      $scope.init = function () {
+        $scope.Message = "Ni ma ca merge si aci";
+        $scope.iaDate();
+
+      }
+      $scope.updateMap = function (locatieParcare) {
+        uluru = { lat: 34.344, lng: 131.036 };
+        // The map, centered at Uluru
+        map = new google.maps.Map(
+          document.getElementById('map'), { zoom: 20, center: uluru, mapTypeId:'satellite' });
+        // The marker, positioned at Uluru
+
+        geocodeAddress(locatieParcare);       
+      }
+
+      $scope.showField = function (field) {
+        $scope[field] = true;
+      }
+
+      $scope.hideField = function (field) {
+        $scope[field] = false;
+      }
+
+
+      $scope.adaugaParcare = function () {
+        $http.post('https://cdrxapiworker.azurewebsites.net/api/post/parcari', $scope.parcareNoua, { headers: { 'Content-Type': 'application/json' } })
+          .then(function (results) {
+            $scope.locuri = results.data;
+          }).finally(function () {
+            $scope.hideField('showFormAdaugare');
+          });
+      }
+
+      $scope.stergeParcare = function (loc) {
+        $http.delete('https://cdrxapiworker.azurewebsites.net/api/delete/parcari/' + loc);  
+      }
+
+      function geocodeAddress(locatieParcare) {
+        var rectBounds = {
+          south: 45.753571,
+          north: 45.753906,
+          west: 21.226400,
+          east: 21.227249,
+
+        };
+        geocoder.geocode({ 'address': locatieParcare }, function (results, status) {
+          if (status === 'OK') {
+            map.setCenter(results[0].geometry.location);
+            marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location,
+              draggable: true
+            });
+            var rectangle = new google.maps.Rectangle({
+              strokeColor: '#FF0000',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: '#FF0000',
+              fillOpacity: 0.35,
+              map: map,
+              bounds: rectBounds,
+              draggable: true
+              
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+      $scope.iaDate = function () {
+        $http.get('https://cdrxapiworker.azurewebsites.net/api/get/parcari')
+          .then(function (results) {
+            $scope.locuri = results.data;
+          })
+      }
+
+      setInterval(function () {
+        $scope.iaDate();
+      }, 2000)
+
+    });
+
+  </script>
+</head>
+<body>
+  <div ng-controller="parcariController" ng-init="init()">
+    <h2>{{Message}}</h2>
+    <!--LISTA PARCARI-->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Lista parcarilor</h3>
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th class="col-xs-1">Id</th>
+                <th class="col-xs-2" ng-click="updateMap()">Locatie</th>
+                <th class="col-xs-1">Total Locuri</th>
+                <th class="col-xs-3">Stare Locuri</th>
+                <th class="col-xs-1">Locuri Disponibile</th>
+              </tr>
+            </thead>
+            <tr ng-repeat="loc in locuri track by $index" class="repeat-animation">
+              <td>{{$index + 1}} </td>
+              <td>{{loc.LocatieParcare}}. </td>
+              <td>{{loc.TotalLocuri}} </td>
+              <td>
+                <span ng-repeat="stare in loc.StareLocuri track by $index">
+                  <span ng-if="stare==1" class="text-danger">O</span>
+                  <span ng-if="stare==0" class="text-success">L</span>
+
+                </span>
+              </td>
+              <td>{{loc.LocuriDisponibile}} </td>
+              <td ng-click="updateMap(loc.LocatieParcare)">
+                <i class="fas fa-map-marker-alt fa-2x text-info"></i>
+              </td>
+              <td>
+                <button role="button" class="btn btn-default btn-rounded" type="button" ng-click="stergeParcare(loc.IdParcare)"><i class="fa fa-trash fa-lg text-danger" aria-hidden="true"></i></button>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!--Buton ADD-->
+        <button id="add-btn" class="btn btn-success" ng-show="!showFormAdaugare" ng-click="showField('showFormAdaugare')">
+          Adauga <span class="glyphicon glyphicon-plus"></span>
+        </button>
+
+        <!--Formular Adaugare-->
+        <div class="panel panel-success animate-hide" ng-show="showFormAdaugare">
+          <div class="panel-heading">
+            <h3 class="panel-title">Adaugare Parcare Noua</h3>
+          </div>
+          <div class="panel-body">
+            <form name="form" data-ng-submit="TNC.addTodo()">
+              <div class="form-group">
+                <label class="control-label">Locatie:</label>
+                <input class="form-control" type="text" ng-model="parcareNoua.LocatieParcare" />
+              </div>
+              <div class="form-group">
+                <label class="control-label">Total Locuri:</label>
+                <input class="form-control" type="text" ng-model="parcareNoua.TotalLocuri" />
+              </div>
+
+              <button id="add-btn" class="btn btn-success" ng-click="adaugaParcare()">Insereaza <span class="glyphicon glyphicon-ok"></span></button>
+            </form>
+          </div>
+
+          <div id="mapAdaugare" class="text-center"></div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+  <!--MAP-->
+  <div id="map" class="text-center"></div>
+
+</body>
+</html>
