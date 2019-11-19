@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Google Maps Parking</title>
+    <style>
+        #map{
+            height: 850px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Google Maps 1MV Parking(DATC-2018)</h1>
+    <div id = "map"></div>
+    <script>
+        function initMap(){
+            var options = {
+                zoom:18,
+                center:{lat:45.744923, lng:21.226628}
+            }
+            var map = new google.maps.Map(document.getElementById('map'), options);
+/*
+            var marker = new google.maps.Marker({
+                position:{lat:45.744669, lng:21.227891},
+                map:map
+            });
+
+            var infoWindow = new google.maps.InfoWindow({
+                content: '<h1>Parking location</h1>'
+            });
+            
+            marker.addListener('click', function(){
+                infoWindow.open(map, marker);
+            });
+            */
+
+            var parkingPlaces = [
+                {   //1A
+                    coords:{lat:45.744964, lng:21.226325},
+                    content:'<h1>LOC 1A</h1>'
+                },
+                {   //2A
+                    coords:{lat:45.744838, lng:21.226306},
+                    content:'<h1>LOC 2A</h1>'
+                },
+                {   //1B
+                    coords:{lat:45.744982, lng:21.226942},
+                    content:'<h1>LOC 1B</h1>',
+                },
+                {   //2B
+                    coords:{lat:45.744812, lng:21.226931},
+                    content:'<h1>LOC 2B</h1>'
+                }
+            ];
+
+            for(var i = 0; i < parkingPlaces.length; i++){
+                addParkingLot(parkingPlaces[i]);
+            }
+/*
+            addParkingLot({
+                coords:{lat:45.744669, lng:21.227891},
+                content:'<h1>LOC 1A</h1>'
+                });
+            addParkingLot({
+                coords:{lat:45.744771, lng:21.227120227891},
+                content:'<h1>LOC 2A</h1>'
+                });
+            addParkingLot({
+                coords:{lat:45.744664, lng:21.228024},
+                content:'<h1>LOC 1B</h1>'
+                });
+*/
+            function addParkingLot(properties){
+                var marker = new google.maps.Marker({
+                position:properties.coords,
+                map:map
+            });
+
+                if(properties.iconImage){
+                    marker.setIcon(properties.iconImage);
+                }
+
+                if(properties.content){
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: properties.content
+                    });
+            
+                    marker.addListener('click', function(){
+                        infoWindow.open(map, marker);
+                    });
+                }
+            }
+        }
+    </script>
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC_z8ccseaw2OPXX-tiSy4jYBaCGQGl7M&callback=initMap"
+async defer></script>
+</body>
+</html> 

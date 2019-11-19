@@ -1,0 +1,20 @@
+-------------C# WORKER & DAQ--------------
+https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-dotnet-get-started-with-queues
+
+
+-------------arduino code-----------------
+https://www.arduino.cc/en/Reference/StyleGuide
+https://www.reddit.com/r/arduino/comments/8kyqx7/reference_for_efficient_programming_and_good/
+https://stackabuse.com/speeding-up-arduino/
+
+-------------arduino serial---------------
+https://www.oreilly.com/library/view/arduino-cookbook/9781449399368/ch04.html
+https://www.arduino.cc/en/Serial/Write
+
+------------AZURE DATABASE----------------
+https://azure.microsoft.com/en-us/services/storage/tables/
+
+------------GMAPS API---------------------
+https://www.w3schools.com/graphics/google_maps_intro.asp
+https://developers.google.com/maps/documentation/javascript/tutorial
+
